@@ -1,0 +1,82 @@
+{
+  "projects": [
+    {
+      "id": 1,
+      "title": "Smart IoT Sensor Network",
+      "description": "A comprehensive IoT system for environmental monitoring using embedded sensors, real-time data processing, and cloud integration. Features include temperature, humidity, and air quality monitoring with automated alerts.",
+      "tech": ["C/C++", "Python", "ROS2", "Verilog", "Cadence"],
+      "image": "/avatar.jpg",
+      "github": "https://github.com/tuongphung/iot-sensor-network",
+      "demo": "https://demo.iot-sensor.net",
+      "tags": ["IoT", "Embedded Systems", "Real-time", "Cloud"],
+      "category": "embedded",
+      "featured": true,
+      "slug": "smart-iot-sensor-network"
+    },
+    {
+      "id": 2,
+      "title": "FPGA Image Processor",
+      "description": "High-performance image processing system implemented on FPGA for real-time computer vision applications. Supports multiple image filters, edge detection, and object recognition algorithms.",
+      "tech": ["Verilog", "C/C++", "Python", "Altium"],
+      "image": "/avatar.jpg",
+      "github": "https://github.com/tuongphung/fpga-image-processor",
+      "demo": "https://demo.fpga-processor.net",
+      "tags": ["FPGA", "Computer Vision", "Real-time", "Hardware"],
+      "category": "hardware",
+      "featured": true,
+      "slug": "fpga-image-processor"
+    },
+    {
+      "id": 3,
+      "title": "Autonomous Robot Navigation",
+      "description": "Advanced autonomous navigation system for mobile robots using SLAM algorithms and sensor fusion. Implements path planning, obstacle avoidance, and localization in dynamic environments.",
+      "tech": ["C++", "Python", "ROS2", "TensorFlow", "OpenCV"],
+      "image": "/avatar.jpg",
+      "github": "https://github.com/tuongphung/robot-navigation",
+      "demo": "https://demo.robot-nav.net",
+      "tags": ["Robotics", "SLAM", "Autonomous", "AI"],
+      "category": "robotics",
+      "featured": false,
+      "slug": "autonomous-robot-navigation"
+    },
+    {
+      "id": 4,
+      "title": "PCB Design Tool",
+      "description": "Custom PCB design automation tool with advanced routing algorithms and component placement optimization. Features include design rule checking and automated manufacturing file generation.",
+      "tech": ["Python", "JavaScript", "Cadence", "KiCad"],
+      "image": "/avatar.jpg",
+      "github": "https://github.com/tuongphung/pcb-design-tool",
+      "demo": "https://demo.pcb-tool.net",
+      "tags": ["PCB Design", "Automation", "EDA", "Manufacturing"],
+      "category": "tools",
+      "featured": false,
+      "slug": "pcb-design-tool"
+    },
+    {
+      "id": 5,
+      "title": "ML Accelerator Chip",
+      "description": "Custom machine learning accelerator chip designed for edge computing applications. Optimized for neural network inference with low power consumption and high throughput.",
+      "tech": ["Verilog", "SystemVerilog", "Python", "TensorFlow"],
+      "image": "/avatar.jpg",
+      "github": "https://github.com/tuongphung/ml-accelerator",
+      "demo": "https://demo.ml-accelerator.net",
+      "tags": ["ML", "ASIC", "Edge Computing", "Neural Networks"],
+      "category": "hardware",
+      "featured": true,
+      "slug": "ml-accelerator-chip"
+    },
+    {
+      "id": 6,
+      "title": "Signal Processing Library",
+      "description": "Comprehensive digital signal processing library with optimized algorithms for audio, image, and sensor data processing. Includes FFT, filtering, and spectral analysis functions.",
+      "tech": ["C/C++", "Python", "MATLAB", "CUDA"],
+      "image": "/avatar.jpg",
+      "github": "https://github.com/tuongphung/signal-processing-lib",
+      "demo": "https://demo.signal-processing.net",
+      "tags": ["DSP", "Audio", "Optimization", "GPU"],
+      "category": "software",
+      "featured": false,
+      "slug": "signal-processing-library"
+    }
+  ]
+} 
