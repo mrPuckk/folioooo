@@ -1,7 +1,6 @@
 import fs from 'fs'
 import path from 'path'
 import matter from 'gray-matter'
-import { compileMDX } from 'next-mdx-remote/rsc'
 import projectsData from '@/data/projects.json'
 
 interface ProjectData {
@@ -32,7 +31,7 @@ export interface ProjectContent {
 }
 
 export interface ProjectWithContent extends ProjectContent {
-  mdxContent: React.ReactElement
+  content: string
 }
 
 const contentDirectory = path.join(process.cwd(), 'content/projects')
@@ -79,15 +78,9 @@ export async function getProjectBySlug(slug: string): Promise<ProjectWithContent
       content: content,
     }
 
-    // Parse MDX content
-    const { content: mdxContent } = await compileMDX({
-      source: content,
-      options: { parseFrontmatter: true }
-    })
-
     return {
       ...project,
-      mdxContent,
+      content: content,
     }
   } catch (error) {
     console.error(`Error reading project ${slug}:`, error)

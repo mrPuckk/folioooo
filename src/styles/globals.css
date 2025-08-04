@@ -1,6 +1,400 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* Tailwind CSS Base Styles */
+@import 'tailwindcss/base';
+
+/* Tailwind CSS Component Styles */
+@import 'tailwindcss/components';
+
+/* Tailwind CSS Utility Styles */
+@import 'tailwindcss/utilities';
+
+/* Custom styles for markdown content */
+.markdown-content {
+  color: hsl(var(--foreground));
+}
+
+.markdown-content h1,
+.markdown-content h2,
+.markdown-content h3,
+.markdown-content h4,
+.markdown-content h5,
+.markdown-content h6 {
+  font-weight: 700;
+  color: hsl(var(--foreground));
+}
+
+.markdown-content h1 {
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+  margin-bottom: 1.5rem;
+  margin-top: 2rem;
+}
+
+.markdown-content h1:first-child {
+  margin-top: 0;
+}
+
+.markdown-content h2 {
+  font-size: 1.5rem;
+  line-height: 2rem;
+  margin-bottom: 1rem;
+  margin-top: 2rem;
+}
+
+.markdown-content h2:first-child {
+  margin-top: 0;
+}
+
+.markdown-content h3 {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  margin-bottom: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+.markdown-content h3:first-child {
+  margin-top: 0;
+}
+
+.markdown-content h4 {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  margin-bottom: 0.5rem;
+  margin-top: 1rem;
+}
+
+.markdown-content h4:first-child {
+  margin-top: 0;
+}
+
+.markdown-content p {
+  margin-bottom: 1rem;
+  line-height: 1.625;
+}
+
+.markdown-content ul,
+.markdown-content ol {
+  margin-bottom: 1rem;
+  margin-top: 0.5rem;
+}
+
+.markdown-content li {
+  color: hsl(var(--foreground));
+}
+
+.markdown-content blockquote {
+  border-left: 4px solid hsl(var(--primary));
+  padding-left: 1rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+  background-color: hsl(var(--primary) / 0.1);
+  border-top-right-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+}
+
+.markdown-content code {
+  background-color: hsl(var(--muted) / 0.5);
+  padding: 0.125rem 0.25rem;
+  border-radius: 0.25rem;
+  font-size: 0.875rem;
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Consolas, "Liberation Mono", Menlo, monospace;
+}
+
+.markdown-content pre {
+  background-color: hsl(var(--muted) / 0.5);
+  border: 1px solid hsl(var(--border));
+  border-radius: 0.5rem;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  overflow-x: auto;
+}
+
+.markdown-content pre code {
+  background-color: transparent;
+  padding: 0;
+}
+
+.markdown-content a {
+  color: hsl(var(--primary));
+  text-decoration: underline;
+  transition: color 0.15s ease-in-out;
+}
+
+.markdown-content a:hover {
+  color: hsl(var(--primary) / 0.8);
+}
+
+.markdown-content strong {
+  font-weight: 600;
+}
+
+.markdown-content em {
+  font-style: italic;
+}
+
+.markdown-content hr {
+  border-color: hsl(var(--border));
+  margin: 2rem 0;
+}
+
+.markdown-content table {
+  width: 100%;
+  border: 1px solid hsl(var(--border));
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.markdown-content thead {
+  background-color: hsl(var(--muted) / 0.5);
+}
+
+.markdown-content th,
+.markdown-content td {
+  padding: 0.5rem 1rem;
+  text-align: left;
+}
+
+.markdown-content th {
+  font-weight: 600;
+}
+
+.markdown-content tr {
+  border-bottom: 1px solid hsl(var(--border));
+}
+
+/* Math rendering styles */
+.katex {
+  color: hsl(var(--foreground));
+}
+
+.katex-display {
+  margin: 1rem 0;
+}
+
+/* Syntax highlighting improvements */
+.hljs {
+  background-color: hsl(var(--muted) / 0.5);
+  border: 1px solid hsl(var(--border));
+  border-radius: 0.5rem;
+}
+
+.hljs-keyword {
+  color: #60a5fa;
+}
+
+.hljs-string {
+  color: #4ade80;
+}
+
+.hljs-comment {
+  color: #6b7280;
+}
+
+.hljs-number {
+  color: #fbbf24;
+}
+
+.hljs-function {
+  color: #a78bfa;
+}
+
+.hljs-variable {
+  color: #22d3ee;
+}
+
+/* Enhanced markdown styles */
+.enhanced-markdown {
+  color: hsl(var(--foreground));
+}
+
+.enhanced-markdown h1,
+.enhanced-markdown h2,
+.enhanced-markdown h3,
+.enhanced-markdown h4,
+.enhanced-markdown h5,
+.enhanced-markdown h6 {
+  font-weight: 700;
+  color: hsl(var(--foreground));
+}
+
+.enhanced-markdown h1 {
+  font-size: 2.25rem;
+  line-height: 2.5rem;
+  margin-bottom: 2rem;
+  margin-top: 3rem;
+  border-bottom: 1px solid hsl(var(--border));
+  padding-bottom: 1rem;
+}
+
+.enhanced-markdown h1:first-child {
+  margin-top: 0;
+}
+
+.enhanced-markdown h2 {
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+  margin-bottom: 1.5rem;
+  margin-top: 2.5rem;
+  border-bottom: 1px solid hsl(var(--border) / 0.5);
+  padding-bottom: 0.5rem;
+}
+
+.enhanced-markdown h2:first-child {
+  margin-top: 0;
+}
+
+.enhanced-markdown h3 {
+  font-size: 1.5rem;
+  line-height: 2rem;
+  margin-bottom: 1rem;
+  margin-top: 2rem;
+}
+
+.enhanced-markdown h3:first-child {
+  margin-top: 0;
+}
+
+.enhanced-markdown h4 {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  margin-bottom: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+.enhanced-markdown h4:first-child {
+  margin-top: 0;
+}
+
+.enhanced-markdown h5 {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  margin-bottom: 0.5rem;
+  margin-top: 1rem;
+}
+
+.enhanced-markdown h5:first-child {
+  margin-top: 0;
+}
+
+.enhanced-markdown h6 {
+  font-size: 1rem;
+  line-height: 1.5rem;
+  margin-bottom: 0.5rem;
+  margin-top: 1rem;
+}
+
+.enhanced-markdown h6:first-child {
+  margin-top: 0;
+}
+
+.enhanced-markdown p {
+  margin-bottom: 1.5rem;
+  line-height: 1.625;
+  font-size: 1rem;
+}
+
+.enhanced-markdown ul,
+.enhanced-markdown ol {
+  margin-bottom: 1.5rem;
+  margin-top: 0.5rem;
+  margin-left: 1rem;
+}
+
+.enhanced-markdown li {
+  line-height: 1.625;
+}
+
+.enhanced-markdown blockquote {
+  border-left: 4px solid hsl(var(--primary));
+  padding-left: 1.5rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  margin-bottom: 1.5rem;
+  background-color: hsl(var(--primary) / 0.05);
+  border-top-right-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+  font-style: italic;
+}
+
+.enhanced-markdown code {
+  background-color: hsl(var(--muted) / 0.5);
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  font-size: 0.875rem;
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Consolas, "Liberation Mono", Menlo, monospace;
+  color: hsl(var(--primary));
+}
+
+.enhanced-markdown pre {
+  background-color: hsl(var(--muted) / 0.5);
+  border: 1px solid hsl(var(--border));
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  overflow-x: auto;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.enhanced-markdown pre code {
+  background-color: transparent;
+  padding: 0;
+  color: hsl(var(--foreground));
+}
+
+.enhanced-markdown a {
+  color: hsl(var(--primary));
+  text-decoration: underline;
+  transition: color 0.2s ease-in-out;
+}
+
+.enhanced-markdown a:hover {
+  color: hsl(var(--primary) / 0.8);
+  text-decoration: none;
+}
+
+.enhanced-markdown strong {
+  font-weight: 700;
+}
+
+.enhanced-markdown em {
+  font-style: italic;
+}
+
+.enhanced-markdown hr {
+  border-color: hsl(var(--border));
+  margin: 3rem 0;
+}
+
+.enhanced-markdown table {
+  width: 100%;
+  border: 1px solid hsl(var(--border));
+  border-radius: 0.5rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.enhanced-markdown thead {
+  background-color: hsl(var(--muted) / 0.5);
+}
+
+.enhanced-markdown th,
+.enhanced-markdown td {
+  padding: 1rem 1.5rem;
+  text-align: left;
+}
+
+.enhanced-markdown th {
+  font-weight: 700;
+}
+
+.enhanced-markdown tr {
+  border-bottom: 1px solid hsl(var(--border));
+  transition: background-color 0.15s ease-in-out;
+}
+
+.enhanced-markdown tr:hover {
+  background-color: hsl(var(--muted) / 0.3);
+}
 
 @layer base {
   :root {
@@ -61,36 +455,52 @@
 
 @layer base {
   * {
-    @apply border-border;
+    border-color: hsl(var(--border));
   }
   body {
-    @apply bg-background text-foreground;
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
   }
 }
 
 @layer components {
   .btn-primary {
-    @apply bg-primary text-primary-foreground hover:bg-primary/90;
+    background-color: hsl(var(--primary));
+    color: hsl(var(--primary-foreground));
+    transition: background-color 0.15s ease-in-out;
+  }
+  
+  .btn-primary:hover {
+    background-color: hsl(var(--primary) / 0.9);
   }
   
   .card-hover {
-    @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-1;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .card-hover:hover {
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    transform: translateY(-0.25rem);
   }
   
   .gradient-text {
-    @apply bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent;
+    background: linear-gradient(to right, hsl(var(--primary)), hsl(var(--secondary)));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
 
   /* Hero typography fixes */
   .hero-heading {
-    @apply font-bold leading-tight;
+    font-weight: 700;
+    line-height: 1.25;
     text-rendering: optimizeLegibility;
     -webkit-font-feature-settings: "kern" 1;
     font-feature-settings: "kern" 1;
   }
 
   .hero-text {
-    @apply leading-normal;
+    line-height: 1.5;
     text-rendering: optimizeLegibility;
   }
 
@@ -103,40 +513,53 @@
 
   /* Skill card animations */
   .skill-card {
-    @apply bg-card border border-border rounded-lg p-6 shadow-md;
+    background-color: hsl(var(--card));
+    border: 1px solid hsl(var(--border));
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
     transition: all 0.3s ease;
   }
 
   .skill-card:hover {
-    @apply shadow-lg border-primary/30;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    border-color: hsl(var(--primary) / 0.3);
     transform: translateY(-4px);
   }
 
   /* Progress bar styling */
   .progress-bar {
-    @apply w-full bg-muted rounded-full h-1 overflow-hidden;
+    width: 100%;
+    background-color: hsl(var(--muted));
+    border-radius: 9999px;
+    height: 0.25rem;
+    overflow: hidden;
   }
 
   .progress-fill {
-    @apply h-full bg-gradient-to-r from-primary to-secondary rounded-full;
+    height: 100%;
+    background: linear-gradient(to right, hsl(var(--primary)), hsl(var(--secondary)));
+    border-radius: 9999px;
     transition: width 1s ease;
   }
 
   /* Skill level indicator */
   .skill-level {
-    @apply text-sm font-medium text-muted-foreground;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: hsl(var(--muted-foreground));
   }
 
   .skill-level.high {
-    @apply text-green-500;
+    color: #22c55e;
   }
 
   .skill-level.medium {
-    @apply text-yellow-500;
+    color: #eab308;
   }
 
   .skill-level.low {
-    @apply text-red-500;
+    color: #ef4444;
   }
 
   /* Enhanced text rendering for hero section */
@@ -177,66 +600,116 @@
 
   /* Prose styling for markdown content */
   .prose {
-    @apply text-foreground;
+    color: hsl(var(--foreground));
   }
 
   .prose h1 {
-    @apply text-3xl font-bold text-foreground mb-6 mt-8;
+    font-size: 1.875rem;
+    line-height: 2.25rem;
+    font-weight: 700;
+    color: hsl(var(--foreground));
+    margin-bottom: 1.5rem;
+    margin-top: 2rem;
   }
 
   .prose h2 {
-    @apply text-2xl font-semibold text-foreground mb-4 mt-6;
+    font-size: 1.5rem;
+    line-height: 2rem;
+    font-weight: 600;
+    color: hsl(var(--foreground));
+    margin-bottom: 1rem;
+    margin-top: 1.5rem;
   }
 
   .prose h3 {
-    @apply text-xl font-semibold text-foreground mb-3 mt-5;
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+    font-weight: 600;
+    color: hsl(var(--foreground));
+    margin-bottom: 0.75rem;
+    margin-top: 1.25rem;
   }
 
   .prose h4 {
-    @apply text-lg font-medium text-foreground mb-2 mt-4;
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+    font-weight: 500;
+    color: hsl(var(--foreground));
+    margin-bottom: 0.5rem;
+    margin-top: 1rem;
   }
 
   .prose p {
-    @apply text-muted-foreground leading-relaxed mb-4;
+    color: hsl(var(--muted-foreground));
+    line-height: 1.625;
+    margin-bottom: 1rem;
   }
 
   .prose ul {
-    @apply list-disc list-inside text-muted-foreground mb-4;
+    list-style-type: disc;
+    list-style-position: inside;
+    color: hsl(var(--muted-foreground));
+    margin-bottom: 1rem;
   }
 
   .prose ol {
-    @apply list-decimal list-inside text-muted-foreground mb-4;
+    list-style-type: decimal;
+    list-style-position: inside;
+    color: hsl(var(--muted-foreground));
+    margin-bottom: 1rem;
   }
 
   .prose li {
-    @apply mb-1;
+    margin-bottom: 0.25rem;
   }
 
   .prose code {
-    @apply bg-muted text-foreground px-2 py-1 rounded text-sm font-mono;
+    background-color: hsl(var(--muted));
+    color: hsl(var(--foreground));
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    font-size: 0.875rem;
+    font-family: ui-monospace, SFMono-Regular, "SF Mono", Consolas, "Liberation Mono", Menlo, monospace;
   }
 
   .prose pre {
-    @apply bg-muted border border-border rounded-lg p-4 overflow-x-auto mb-4;
+    background-color: hsl(var(--muted));
+    border: 1px solid hsl(var(--border));
+    border-radius: 0.5rem;
+    padding: 1rem;
+    overflow-x: auto;
+    margin-bottom: 1rem;
   }
 
   .prose pre code {
-    @apply bg-transparent p-0;
+    background-color: transparent;
+    padding: 0;
   }
 
   .prose blockquote {
-    @apply border-l-4 border-primary pl-4 italic text-muted-foreground mb-4;
+    border-left: 4px solid hsl(var(--primary));
+    padding-left: 1rem;
+    font-style: italic;
+    color: hsl(var(--muted-foreground));
+    margin-bottom: 1rem;
   }
 
   .prose a {
-    @apply text-primary hover:text-primary/80 underline;
+    color: hsl(var(--primary));
+    text-decoration: underline;
+  }
+
+  .prose a:hover {
+    color: hsl(var(--primary) / 0.8);
   }
 
   .prose strong {
-    @apply font-semibold text-foreground;
+    font-weight: 600;
+    color: hsl(var(--foreground));
   }
 
   .prose em {
-    @apply italic text-muted-foreground;
+    font-style: italic;
+    color: hsl(var(--muted-foreground));
   }
 } 

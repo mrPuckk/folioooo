@@ -6,6 +6,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { Badge } from '@/components/ui/Badge'
 import { Button } from '@/components/ui/Button'
+import { EnhancedMarkdownRenderer } from '@/components/EnhancedMarkdownRenderer'
 import { ProjectWithContent } from '@/lib/projects'
 
 interface ProjectDetailProps {
@@ -178,7 +179,7 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
         <div className="max-w-4xl mx-auto">
           <article className="prose prose-lg prose-invert max-w-none">
             <div className="bg-card/50 backdrop-blur-sm border border-border/50 rounded-2xl p-8 md:p-12">
-              {project.mdxContent}
+              <EnhancedMarkdownRenderer content={project.content} />
             </div>
           </article>
         </div>

@@ -77,6 +77,19 @@
       "category": "software",
       "featured": false,
       "slug": "signal-processing-library"
+    },
+    {
+      "id": 7,
+      "title": "Mathematical Content Demo",
+      "description": "Demonstration of enhanced markdown and LaTeX rendering capabilities with comprehensive mathematical expressions, code highlighting, and technical content formatting.",
+      "tech": ["LaTeX", "Markdown", "React", "TypeScript"],
+      "image": "/avatar.jpg",
+      "github": "https://github.com/tuongphung/math-demo",
+      "demo": "https://demo.math-content.net",
+      "tags": ["Math", "Demo", "LaTeX", "Technical Writing"],
+      "category": "demo",
+      "featured": false,
+      "slug": "math-demo"
     }
   ]
 } 
