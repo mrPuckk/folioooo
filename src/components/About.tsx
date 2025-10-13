@@ -4,17 +4,6 @@ import { motion } from 'framer-motion'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card'
 import { Badge } from '@/components/ui/Badge'
 
-// ---------------- Types ----------------
-interface TimelineItem {
-  type: 'education' | 'experience' | 'training' | 'course'
-  title: string
-  institution: string
-  period: string
-  description?: string
-  bullets?: string[]
-  tags?: string[]
-}
-
 export function About() {
   const skills = [
     { name: 'C/C++', category: 'Programming', level: 'Expert' },
@@ -27,112 +16,28 @@ export function About() {
     { name: 'STM32', category: 'Embedded', level: 'Advanced' }
   ]
 
-  const timeline: TimelineItem[] = [
-    // ----- EDUCATION / CERTIFICATIONS -----
+  const timeline = [
     {
-      type: 'education',
-      title: 'Bachelor of Engineering – Mechatronic',
-      institution: 'Ho Chi Minh University of Technology',
-      period: '2015',
-      bullets: [
+        type: 'education',
+        title: 'Bachelor of Engineering – Mechatronic',
+        institution: 'Ho Chi Minh University of Technology',
+        period: '2015',
+        bullets: [
         'High Distinction in core maths/physics and engineering courses',
         'Built an autonomous drone (Arduino): sensor fusion, control algorithms, basic navigation'
-      ]
+        ]
     },
     {
-      type: 'education',
-      title: 'Bachelor of Engineering – Mechatronic (Honours)',
-      institution: 'University of Technology',
-      period: '2020–2023',
-      bullets: [
+        type: 'education',
+        title: 'Bachelor of Engineering – Mechatronic (Honours)',
+        institution: 'University of Technology',
+        period: '2020–2023',
+        bullets: [
         'Hands-on with FPGA/digital design (Boolean → FSM → HDL graphs)',
         'Worked with sensors and modern C++ (OOP, concurrency, code quality)',
         'End-to-end IoT gas-detection system with real-time detection and live dashboard'
-      ]
+        ]
     },
-
-    // ----- EDUCATION / CERTIFICATIONS -----
-    {
-      type: 'education',
-      title: 'AI & Machine Learning Certification',
-      institution: 'Online Platform',
-      period: '2022–2023',
-      description:
-        'Completed advanced courses in computer vision and neural network implementation.',
-      tags: ['AI/ML', 'Computer Vision', 'Neural Networks', 'Python']
-    },
-
-    // ----- TRAINING -----
-    {
-      type: 'training',
-      title: 'Analog IC Design Trainee',
-      institution: 'Mentor: Dr. Huy Binh (Senior Analog Engineer, Apple, UK)',
-      period: 'Apr 2025 – Present',
-      bullets: [
-        'CMOS analog fundamentals: biasing, current mirrors, OTA/op-amp topologies (folded/telescopic).',
-        'Noise/mismatch, corners/Monte Carlo; stability/phase margin and PSRR optimization.',
-        'Hands-on design flow: specification → schematic → simulation (AC/TRAN/NOISE) → layout considerations.'
-      ],
-      tags: ['Analog IC', 'CMOS', 'Op-Amp', 'PSRR', 'Stability', 'Spectre']
-    },
-    {
-      type: 'training',
-      title: 'RF Design Trainee',
-      institution: 'Mentor: PM Doan Hung (Bosch Vietnam)',
-      period: 'Jun 2024',
-      bullets: [
-        'Intro RF chain: matching networks, S-parameters, NF/Gain/Linearity trade-offs.',
-        'Layout & EMC/EMI practices for high-frequency boards; de-embedding & measurement basics.'
-      ],
-      tags: ['RF', 'S-parameters', 'Matching', 'EMC/EMI', 'RF Layout']
-    },
-
-    // ----- COURSES / PROGRAMS -----
-    {
-      type: 'course',
-      title: 'AIDE (MLOps & Data) – 6-Month Program',
-      institution: 'AIDE',
-      period: '6 months',
-      bullets: [
-        'Data pipelines, experiment tracking, CI/CD for ML, model packaging and deployment.',
-        'Monitoring & retraining loops; reproducibility with containers and versioned datasets.'
-      ],
-      tags: ['MLOps', 'Data', 'CI/CD', 'MLflow', 'Docker', 'Pipelines']
-    },
-    {
-      type: 'course',
-      title: 'Neural Signal Processing & Time-Frequency Methods',
-      institution: 'Specialized Program',
-      period: '—',
-      bullets: [
-        'EEG/ECG processing, STFT/wavelets; artifact removal and spectral feature engineering.',
-        'Real-time signal inference considerations and validation protocols.'
-      ],
-      tags: ['Signal Processing', 'EEG/ECG', 'Time-Frequency', 'STFT', 'Wavelet']
-    },
-    {
-      type: 'course',
-      title: 'AIO (ML/DL Training) – 1-Year Program',
-      institution: 'AIO',
-      period: '1 year',
-      bullets: [
-        'Foundations → modern DL (CNN/RNN/Transformers); CV/NLP projects with production focus.',
-        'Optimization, quantization, and deployment patterns across edge and cloud.'
-      ],
-      tags: ['ML/DL', 'Transformers', 'CV', 'NLP', 'Optimization']
-    },
-    {
-      type: 'course',
-      title: 'Advanced Digital Hardware Design (FPGA/SoC & High-Speed PCB)',
-      institution: 'Professional Track',
-      period: '—',
-      bullets: [
-        'RTL design on FPGA/SoC, AXI/DMA, timing closure and verification.',
-        'High-speed PCB constraints: DDR/PCIe/ETH, impedance control, return paths.',
-        'Mixed-Signal Hardware Design: data-converter interfaces, grounding/partitioning practices.'
-      ],
-      tags: ['FPGA', 'SoC', 'RTL', 'AXI', 'High-Speed PCB', 'Mixed-Signal']
-    }
   ]
 
   const containerVariants = {
@@ -155,13 +60,6 @@ export function About() {
         duration: 0.6
       }
     }
-  }
-
-  const typeLabel: Record<TimelineItem['type'], string> = {
-    education: '🎓 Education',
-    experience: '💼 Experience',
-    training: '🧪 Training',
-    course: '📚 Course'
   }
 
   return (
@@ -300,7 +198,7 @@ export function About() {
 
                 {timeline.map((item, index) => (
                   <motion.div
-                    key={`${item.title}-${index}`}
+                    key={index}
                     className={`relative mb-8 ${
                       index % 2 === 0 ? 'md:pr-8 md:text-right' : 'md:pl-8 md:text-left'
                     }`}
@@ -309,18 +207,14 @@ export function About() {
                     transition={{ duration: 0.6, delay: index * 0.2 }}
                   >
                     {/* Enhanced Timeline Dot */}
-                    <div
-                      className={`absolute top-4 w-4 h-4 rounded-full bg-gradient-to-r from-primary to-secondary shadow-lg ${
-                        index % 2 === 0 ? 'left-2 md:left-auto md:right-[-8px]' : 'left-2 md:left-[-8px]'
-                      }`}
-                    />
+                    <div className={`absolute top-4 w-4 h-4 rounded-full bg-gradient-to-r from-primary to-secondary shadow-lg ${
+                      index % 2 === 0 ? 'left-2 md:left-auto md:right-[-8px]' : 'left-2 md:left-[-8px]'
+                    }`} />
 
                     {/* Content */}
-                    <div
-                      className={`ml-8 md:ml-0 ${
-                        index % 2 === 0 ? 'md:mr-8' : 'md:ml-8'
-                      }`}
-                    >
+                    <div className={`ml-8 md:ml-0 ${
+                      index % 2 === 0 ? 'md:mr-8' : 'md:ml-8'
+                    }`}>
                       <Card className="group hover:shadow-2xl transition-all duration-300 border-primary/20 hover:border-primary/40 bg-background/90 backdrop-blur-sm shadow-lg">
                         <CardHeader>
                           <div className="flex items-center justify-between mb-2">
@@ -328,7 +222,7 @@ export function About() {
                               variant={item.type === 'education' ? 'default' : 'secondary'}
                               className="text-xs font-medium"
                             >
-                              {typeLabel[item.type]}
+                              {item.type === 'education' ? '🎓 Education' : '💼 Experience'}
                             </Badge>
                             <span className="text-xs text-muted-foreground font-medium">
                               {item.period}
@@ -342,32 +236,9 @@ export function About() {
                           </p>
                         </CardHeader>
                         <CardContent>
-                          {/* Description (optional) */}
-                          {item.description && (
-                            <p className="text-sm text-muted-foreground leading-relaxed">
-                              {item.description}
-                            </p>
-                          )}
-
-                          {/* Bullets (optional) */}
-                          {item.bullets && item.bullets.length > 0 && (
-                            <ul className="mt-2 list-disc text-sm text-muted-foreground pl-5 space-y-1">
-                              {item.bullets.map((b, i) => (
-                                <li key={i}>{b}</li>
-                              ))}
-                            </ul>
-                          )}
-
-                          {/* Tags (optional) */}
-                          {item.tags && item.tags.length > 0 && (
-                            <div className="mt-3 flex flex-wrap gap-2">
-                              {item.tags.map((t, i) => (
-                                <Badge key={`${t}-${i}`} variant="outline" className="text-xs">
-                                  {t}
-                                </Badge>
-                              ))}
-                            </div>
-                          )}
+                          <p className="text-sm text-muted-foreground leading-relaxed">
+                            {item.description}
+                          </p>
                         </CardContent>
                       </Card>
                     </div>
