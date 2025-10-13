@@ -18,26 +18,50 @@ export function About() {
 
   const timeline = [
     {
-        type: 'education',
-        title: 'Bachelor of Engineering – Mechatronic',
-        institution: 'Ho Chi Minh University of Technology',
-        period: '2015',
-        bullets: [
+      type: 'education',
+      title: 'Bachelor of Engineering',
+      institution: 'Ho Chi Minh University of Technology',
+      period: '2015',
+      description: [
         'High Distinction in core maths/physics and engineering courses',
         'Built an autonomous drone (Arduino): sensor fusion, control algorithms, basic navigation'
-        ]
+      ]
     },
     {
-        type: 'education',
-        title: 'Bachelor of Engineering – Mechatronic (Honours)',
-        institution: 'University of Technology',
-        period: '2020–2023',
-        bullets: [
-        'Hands-on with FPGA/digital design (Boolean → FSM → HDL graphs)',
-        'Worked with sensors and modern C++ (OOP, concurrency, code quality)',
-        'End-to-end IoT gas-detection system with real-time detection and live dashboard'
-        ]
+      type: 'education',
+      title: 'Bachelor of Engineering',
+      institution: 'University of Technology',
+      period: '2020 - 2024',
+      description: 'Specialized in Electrical Engineering with focus on embedded systems and digital design.'
     },
+    {
+      type: 'experience',
+      title: 'MIT',
+      institution: 'Tech Innovations Inc.',
+      period: '2023 - Present',
+      description: 'Developing IoT solutions and embedded firmware for industrial applications.'
+    },
+    {
+      type: 'experience',
+      title: 'Embedded Systems Engineer',
+      institution: 'Tech Innovations Inc.',
+      period: '2023 - Present',
+      description: 'Developing IoT solutions and embedded firmware for industrial applications.'
+    },
+    {
+      type: 'education',
+      title: 'AI & Machine Learning Certification',
+      institution: 'Online Platform',
+      period: '2022 - 2023',
+      description: 'Completed advanced courses in computer vision and neural network implementation.'
+    },
+    {
+      type: 'experience',
+      title: 'Research Assistant',
+      institution: 'University Lab',
+      period: '2022 - 2023',
+      description: 'Conducted research on FPGA-based signal processing and real-time systems.'
+    }
   ]
 
   const containerVariants = {
