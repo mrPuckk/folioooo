@@ -16,110 +16,113 @@ export function About() {
     { name: 'STM32', category: 'Embedded', level: 'Advanced' }
   ]
 
-  const timeline = [
-    // ----- EDUCATION / CERTIFICATIONS -----
-    {
-      title: "Bachelor of Engineering – Mechatronic",
-      institution: "Ho Chi Minh University of Technology",
-      period: "2015",
-      bullets: [
-        "High Distinction in core maths/physics and engineering courses",
-        "Built an autonomous drone (Arduino): sensor fusion, control algorithms, basic navigation"
-      ]
-    },
-    {
-      title: "Bachelor of Engineering – Mechatronic (Honours)",
-      institution: "University of Technology",
-      period: "2020–2023",
-      bullets: [
-        "Hands-on with FPGA/digital design (Boolean → FSM → HDL graphs)",
-        "Worked with sensors and modern C++ (OOP, concurrency, code quality)",
-        "End-to-end IoT gas-detection system with real-time detection and live dashboard"
-      ]
-    }
-    // ----- EDUCATION / CERTIFICATIONS -----
-    {
-        type: "education",
-        title: "AI & Machine Learning Certification",
-        institution: "Online Platform",
-        period: "2022 – 2023",
-        description:
-        "Completed advanced courses in computer vision and neural network implementation.",
-        tags: ["AI/ML", "Computer Vision", "Neural Networks", "Python"]
-    },
+ const timeline = [
+  // ----- EDUCATION / CERTIFICATIONS -----
+  {
+    type: "education",
+    title: "Bachelor of Engineering – Mechatronic",
+    institution: "Ho Chi Minh University of Technology",
+    period: "2015",
+    bullets: [
+      "High Distinction in core maths/physics and engineering courses",
+      "Built an autonomous drone (Arduino): sensor fusion, control algorithms, basic navigation"
+    ]
+  },
+  {
+    type: "education",
+    title: "Bachelor of Engineering – Mechatronic (Honours)",
+    institution: "University of Technology",
+    period: "2020–2023",
+    bullets: [
+      "Hands-on with FPGA/digital design (Boolean → FSM → HDL graphs)",
+      "Worked with sensors and modern C++ (OOP, concurrency, code quality)",
+      "End-to-end IoT gas-detection system with real-time detection and live dashboard"
+    ]
+  },
 
-    // ----- TRAINING -----
-    {
-        type: "training",
-        title: "Analog IC Design Trainee",
-        institution: "Mentor: Dr. Huy Binh (Senior Analog Engineer, Apple, UK)",
-        period: "Apr 2025 – Present",
-        bullets: [
-        "CMOS analog fundamentals: biasing, current mirrors, OTA/op-amp topologies (folded/telescopic).",
-        "Noise/mismatch, corners/Monte Carlo; stability/phase margin and PSRR optimization.",
-        "Hands-on design flow: specification → schematic → simulation (AC/TRAN/NOISE) → layout considerations."
-        ],
-        tags: ["Analog IC", "CMOS", "Op-Amp", "PSRR", "Stability", "Spectre"]
-    },
-    {
-        type: "training",
-        title: "RF Design Trainee",
-        institution: "Mentor: PM Doan Hung (Bosch Vietnam)",
-        period: "Jun 2024",
-        bullets: [
-        "Intro RF chain: matching networks, S-parameters, NF/Gain/Linearity trade-offs.",
-        "Layout & EMC/EMI practices for high-frequency boards; de-embedding & measurement basics."
-        ],
-        tags: ["RF", "S-parameters", "Matching", "EMC/EMI", "RF Layout"]
-    },
+  // ----- EDUCATION / CERTIFICATIONS -----
+  {
+    type: "education",
+    title: "AI & Machine Learning Certification",
+    institution: "Online Platform",
+    period: "2022–2023",
+    description:
+      "Completed advanced courses in computer vision and neural network implementation.",
+    tags: ["AI/ML", "Computer Vision", "Neural Networks", "Python"]
+  },
 
-    // ----- COURSES / PROGRAMS -----
-    {
-        type: "course",
-        title: "AIDE (MLOps & Data) – 6-Month Program",
-        institution: "AIDE",
-        period: "6 months",
-        bullets: [
-        "Data pipelines, experiment tracking, CI/CD for ML, model packaging and deployment.",
-        "Monitoring & retraining loops; reproducibility with containers and versioned datasets."
-        ],
-        tags: ["MLOps", "Data", "CI/CD", "MLflow", "Docker", "Pipelines"]
-    },
-    {
-        type: "course",
-        title: "Neural Signal Processing & Time-Frequency Methods",
-        institution: "Specialized Program",
-        period: "—",
-        bullets: [
-        "EEG/ECG processing, STFT/wavelets; artifact removal and spectral feature engineering.",
-        "Real-time signal inference considerations and validation protocols."
-        ],
-        tags: ["Signal Processing", "EEG/ECG", "Time-Frequency", "STFT", "Wavelet"]
-    },
-    {
-        type: "course",
-        title: "AIO (ML/DL Training) – 1-Year Program",
-        institution: "AIO",
-        period: "1 year",
-        bullets: [
-        "Foundations → modern DL (CNN/RNN/Transformers); CV/NLP projects with production focus.",
-        "Optimization, quantization, and deployment patterns across edge and cloud."
-        ],
-        tags: ["ML/DL", "Transformers", "CV", "NLP", "Optimization"]
-    },
-    {
-        type: "course",
-        title: "Advanced Digital Hardware Design (FPGA/SoC & High-Speed PCB)",
-        institution: "Professional Track",
-        period: "—",
-        bullets: [
-        "RTL design on FPGA/SoC, AXI/DMA, timing closure and verification.",
-        "High-speed PCB constraints: DDR/PCIe/ETH, impedance control, return paths.",
-        "Mixed-Signal Hardware Design: data-converter interfaces, grounding/partitioning practices."
-        ],
-        tags: ["FPGA", "SoC", "RTL", "AXI", "High-Speed PCB", "Mixed-Signal"]
-    }
-  ]
+  // ----- TRAINING -----
+  {
+    type: "training",
+    title: "Analog IC Design Trainee",
+    institution: "Mentor: Dr. Huy Binh (Senior Analog Engineer, Apple, UK)",
+    period: "Apr 2025 – Present",
+    bullets: [
+      "CMOS analog fundamentals: biasing, current mirrors, OTA/op-amp topologies (folded/telescopic).",
+      "Noise/mismatch, corners/Monte Carlo; stability/phase margin and PSRR optimization.",
+      "Hands-on design flow: specification → schematic → simulation (AC/TRAN/NOISE) → layout considerations."
+    ],
+    tags: ["Analog IC", "CMOS", "Op-Amp", "PSRR", "Stability", "Spectre"]
+  },
+  {
+    type: "training",
+    title: "RF Design Trainee",
+    institution: "Mentor: PM Doan Hung (Bosch Vietnam)",
+    period: "Jun 2024",
+    bullets: [
+      "Intro RF chain: matching networks, S-parameters, NF/Gain/Linearity trade-offs.",
+      "Layout & EMC/EMI practices for high-frequency boards; de-embedding & measurement basics."
+    ],
+    tags: ["RF", "S-parameters", "Matching", "EMC/EMI", "RF Layout"]
+  },
+
+  // ----- COURSES / PROGRAMS -----
+  {
+    type: "course",
+    title: "AIDE (MLOps & Data) – 6-Month Program",
+    institution: "AIDE",
+    period: "6 months",
+    bullets: [
+      "Data pipelines, experiment tracking, CI/CD for ML, model packaging and deployment.",
+      "Monitoring & retraining loops; reproducibility with containers and versioned datasets."
+    ],
+    tags: ["MLOps", "Data", "CI/CD", "MLflow", "Docker", "Pipelines"]
+  },
+  {
+    type: "course",
+    title: "Neural Signal Processing & Time-Frequency Methods",
+    institution: "Specialized Program",
+    period: "—",
+    bullets: [
+      "EEG/ECG processing, STFT/wavelets; artifact removal and spectral feature engineering.",
+      "Real-time signal inference considerations and validation protocols."
+    ],
+    tags: ["Signal Processing", "EEG/ECG", "Time-Frequency", "STFT", "Wavelet"]
+  },
+  {
+    type: "course",
+    title: "AIO (ML/DL Training) – 1-Year Program",
+    institution: "AIO",
+    period: "1 year",
+    bullets: [
+      "Foundations → modern DL (CNN/RNN/Transformers); CV/NLP projects with production focus.",
+      "Optimization, quantization, and deployment patterns across edge and cloud."
+    ],
+    tags: ["ML/DL", "Transformers", "CV", "NLP", "Optimization"]
+  },
+  {
+    type: "course",
+    title: "Advanced Digital Hardware Design (FPGA/SoC & High-Speed PCB)",
+    institution: "Professional Track",
+    period: "—",
+    bullets: [
+      "RTL design on FPGA/SoC, AXI/DMA, timing closure and verification.",
+      "High-speed PCB constraints: DDR/PCIe/ETH, impedance control, return paths.",
+      "Mixed-Signal Hardware Design: data-converter interfaces, grounding/partitioning practices."
+    ],
+    tags: ["FPGA", "SoC", "RTL", "AXI", "High-Speed PCB", "Mixed-Signal"]
+  }
+ ] as const;
 
   const containerVariants = {
     hidden: { opacity: 0 },
