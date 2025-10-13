@@ -22,10 +22,9 @@ export function About() {
       title: 'Bachelor of Engineering',
       institution: 'Ho Chi Minh University of Technology',
       period: '2015',
-      description: [
+      description:
         'High Distinction in core maths/physics and engineering courses',
         'Built an autonomous drone (Arduino): sensor fusion, control algorithms, basic navigation'
-      ]
     },
     {
       type: 'education',
