@@ -17,40 +17,107 @@ export function About() {
   ]
 
   const timeline = [
+    // ----- EDUCATION / CERTIFICATIONS -----
     {
-      type: 'education',
-      title: 'Bachelor of Engineering',
-      institution: 'University of Technology',
-      period: '2020 - 2024',
-      description: 'Specialized in Electrical Engineering with focus on embedded systems and digital design.'
+      title: "Bachelor of Engineering – Mechatronic",
+      institution: "Ho Chi Minh University of Technology",
+      period: "2015",
+      bullets: [
+        "High Distinction in core maths/physics and engineering courses",
+        "Built an autonomous drone (Arduino): sensor fusion, control algorithms, basic navigation"
+      ]
     },
     {
-      type: 'experience',
-      title: 'MIT',
-      institution: 'Tech Innovations Inc.',
-      period: '2023 - Present',
-      description: 'Developing IoT solutions and embedded firmware for industrial applications.'
+      title: "Bachelor of Engineering – Mechatronic (Honours)",
+      institution: "University of Technology",
+      period: "2020–2023",
+      bullets: [
+        "Hands-on with FPGA/digital design (Boolean → FSM → HDL graphs)",
+        "Worked with sensors and modern C++ (OOP, concurrency, code quality)",
+        "End-to-end IoT gas-detection system with real-time detection and live dashboard"
+      ]
+    }
+    // ----- EDUCATION / CERTIFICATIONS -----
+    {
+        type: "education",
+        title: "AI & Machine Learning Certification",
+        institution: "Online Platform",
+        period: "2022 – 2023",
+        description:
+        "Completed advanced courses in computer vision and neural network implementation.",
+        tags: ["AI/ML", "Computer Vision", "Neural Networks", "Python"]
+    },
+
+    // ----- TRAINING -----
+    {
+        type: "training",
+        title: "Analog IC Design Trainee",
+        institution: "Mentor: Dr. Huy Binh (Senior Analog Engineer, Apple, UK)",
+        period: "Apr 2025 – Present",
+        bullets: [
+        "CMOS analog fundamentals: biasing, current mirrors, OTA/op-amp topologies (folded/telescopic).",
+        "Noise/mismatch, corners/Monte Carlo; stability/phase margin and PSRR optimization.",
+        "Hands-on design flow: specification → schematic → simulation (AC/TRAN/NOISE) → layout considerations."
+        ],
+        tags: ["Analog IC", "CMOS", "Op-Amp", "PSRR", "Stability", "Spectre"]
     },
     {
-      type: 'experience',
-      title: 'Embedded Systems Engineer',
-      institution: 'Tech Innovations Inc.',
-      period: '2023 - Present',
-      description: 'Developing IoT solutions and embedded firmware for industrial applications.'
+        type: "training",
+        title: "RF Design Trainee",
+        institution: "Mentor: PM Doan Hung (Bosch Vietnam)",
+        period: "Jun 2024",
+        bullets: [
+        "Intro RF chain: matching networks, S-parameters, NF/Gain/Linearity trade-offs.",
+        "Layout & EMC/EMI practices for high-frequency boards; de-embedding & measurement basics."
+        ],
+        tags: ["RF", "S-parameters", "Matching", "EMC/EMI", "RF Layout"]
+    },
+
+    // ----- COURSES / PROGRAMS -----
+    {
+        type: "course",
+        title: "AIDE (MLOps & Data) – 6-Month Program",
+        institution: "AIDE",
+        period: "6 months",
+        bullets: [
+        "Data pipelines, experiment tracking, CI/CD for ML, model packaging and deployment.",
+        "Monitoring & retraining loops; reproducibility with containers and versioned datasets."
+        ],
+        tags: ["MLOps", "Data", "CI/CD", "MLflow", "Docker", "Pipelines"]
     },
     {
-      type: 'education',
-      title: 'AI & Machine Learning Certification',
-      institution: 'Online Platform',
-      period: '2022 - 2023',
-      description: 'Completed advanced courses in computer vision and neural network implementation.'
+        type: "course",
+        title: "Neural Signal Processing & Time-Frequency Methods",
+        institution: "Specialized Program",
+        period: "—",
+        bullets: [
+        "EEG/ECG processing, STFT/wavelets; artifact removal and spectral feature engineering.",
+        "Real-time signal inference considerations and validation protocols."
+        ],
+        tags: ["Signal Processing", "EEG/ECG", "Time-Frequency", "STFT", "Wavelet"]
     },
     {
-      type: 'experience',
-      title: 'Research Assistant',
-      institution: 'University Lab',
-      period: '2022 - 2023',
-      description: 'Conducted research on FPGA-based signal processing and real-time systems.'
+        type: "course",
+        title: "AIO (ML/DL Training) – 1-Year Program",
+        institution: "AIO",
+        period: "1 year",
+        bullets: [
+        "Foundations → modern DL (CNN/RNN/Transformers); CV/NLP projects with production focus.",
+        "Optimization, quantization, and deployment patterns across edge and cloud."
+        ],
+        tags: ["ML/DL", "Transformers", "CV", "NLP", "Optimization"]
+    },
+    {
+        type: "course",
+        title: "Advanced Digital Hardware Design (FPGA/SoC & High-Speed PCB)",
+        institution: "Professional Track",
+        period: "—",
+        bullets: [
+        "RTL design on FPGA/SoC, AXI/DMA, timing closure and verification.",
+        "High-speed PCB constraints: DDR/PCIe/ETH, impedance control, return paths.",
+        "Mixed-Signal Hardware Design: data-converter interfaces, grounding/partitioning practices."
+        ],
+        tags: ["FPGA", "SoC", "RTL", "AXI", "High-Speed PCB", "Mixed-Signal"]
     }
   ]
 
@@ -80,7 +147,7 @@ export function About() {
     <section className="relative py-20 px-4 overflow-hidden">
       {/* Enhanced Background with Better Contrast */}
       <div className="absolute inset-0 bg-gradient-to-br from-background via-background/95 to-background/90" />
-      
+
       {/* Enhanced Animated Background Elements */}
       <div className="absolute inset-0 overflow-hidden">
         <motion.div
@@ -111,7 +178,7 @@ export function About() {
             ease: 'easeInOut'
           }}
         />
-        
+
         {/* Additional depth elements */}
         <motion.div
           className="absolute top-1/2 left-1/3 w-64 h-64 bg-primary/20 rounded-full blur-2xl"
@@ -136,7 +203,7 @@ export function About() {
           viewport={{ once: true }}
         >
           {/* Header */}
-          <motion.h2 
+          <motion.h2
             className="text-5xl lg:text-6xl font-bold text-center mb-16 bg-gradient-to-r from-primary via-primary/80 to-secondary bg-clip-text text-transparent"
             variants={itemVariants}
           >
@@ -144,7 +211,7 @@ export function About() {
           </motion.h2>
 
           {/* Summary Paragraph with Enhanced Backdrop */}
-          <motion.div 
+          <motion.div
             className="max-w-4xl mx-auto mb-16"
             variants={itemVariants}
           >
@@ -152,10 +219,10 @@ export function About() {
               <div className="absolute inset-0 bg-background/70 backdrop-blur-md rounded-2xl -m-6 p-6 border border-border/20 shadow-xl" />
               <div className="relative">
                 <p className="text-lg text-muted-foreground leading-relaxed text-center">
-                  I&apos;m a passionate engineer specializing in embedded systems and artificial intelligence. 
-                  With expertise in hardware design, firmware development, and machine learning, I create 
-                  innovative solutions that bridge the gap between software and hardware. My work focuses 
-                  on developing intelligent systems for IoT applications, computer vision implementations, 
+                  I&apos;m a passionate engineer specializing in embedded systems and artificial intelligence.
+                  With expertise in hardware design, firmware development, and machine learning, I create
+                  innovative solutions that bridge the gap between software and hardware. My work focuses
+                  on developing intelligent systems for IoT applications, computer vision implementations,
                   and real-time embedded solutions.
                 </p>
               </div>
@@ -163,7 +230,7 @@ export function About() {
           </motion.div>
 
           {/* Skills & Technologies with Enhanced Styling */}
-          <motion.div 
+          <motion.div
             className="mb-16"
             variants={itemVariants}
           >
@@ -184,8 +251,8 @@ export function About() {
                       <h4 className="font-semibold text-sm mb-1 group-hover:text-primary transition-colors">
                         {skill.name}
                       </h4>
-                      <Badge 
-                        variant="secondary" 
+                      <Badge
+                        variant="secondary"
                         className="text-xs font-medium bg-gradient-to-r from-primary/20 to-secondary/20"
                       >
                         {skill.level}
@@ -209,7 +276,7 @@ export function About() {
               <div className="relative">
                 {/* Enhanced Timeline Line */}
                 <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-1 bg-gradient-to-b from-primary to-secondary transform -translate-x-1/2 shadow-lg" />
-                
+
                 {timeline.map((item, index) => (
                   <motion.div
                     key={index}
@@ -224,7 +291,7 @@ export function About() {
                     <div className={`absolute top-4 w-4 h-4 rounded-full bg-gradient-to-r from-primary to-secondary shadow-lg ${
                       index % 2 === 0 ? 'left-2 md:left-auto md:right-[-8px]' : 'left-2 md:left-[-8px]'
                     }`} />
-                    
+
                     {/* Content */}
                     <div className={`ml-8 md:ml-0 ${
                       index % 2 === 0 ? 'md:mr-8' : 'md:ml-8'
@@ -232,7 +299,7 @@ export function About() {
                       <Card className="group hover:shadow-2xl transition-all duration-300 border-primary/20 hover:border-primary/40 bg-background/90 backdrop-blur-sm shadow-lg">
                         <CardHeader>
                           <div className="flex items-center justify-between mb-2">
-                            <Badge 
+                            <Badge
                               variant={item.type === 'education' ? 'default' : 'secondary'}
                               className="text-xs font-medium"
                             >
@@ -265,4 +332,4 @@ export function About() {
       </div>
     </section>
   )
-} 
+}
