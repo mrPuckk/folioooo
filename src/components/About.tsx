@@ -18,48 +18,98 @@ export function About() {
 
   const timeline = [
     {
-      type: 'education',
-      title: 'Bachelor of Engineering',
-      institution: 'Ho Chi Minh University of Technology',
-      period: '2015',
-      description:
-        'High Distinction in core maths/physics and engineering courses',
-        'Built an autonomous drone (Arduino): sensor fusion, control algorithms, basic navigation'
+        type: 'education',
+        title: 'Bachelor of Engineering – Electrical/Mechatronics',
+        institution: 'Ho Chi Minh University of Technology (HCMUT)',
+        period: '2015',
+        description:
+        'High Distinction in Advanced Mathematics I–II, Physics I–II, and core engineering.',
+        'Built an autonomous Arduino-based drone: sensor fusion, control algorithms, basic navigation.'
     },
     {
-      type: 'education',
-      title: 'Bachelor of Engineering',
-      institution: 'University of Technology',
-      period: '2020 - 2024',
-      description: 'Specialized in Electrical Engineering with focus on embedded systems and digital design.'
+        type: 'education',
+        title: 'Bachelor of Engineering (Honours) – Mechatronics',
+        institution: 'University of Technology',
+        period: '2020 – 2024',
+        description:
+        'Focus: embedded systems, digital design, and real-time systems.',
+        'Hands-on projects with FPGA/HDL, sensors, and modern C++ (concurrency, code quality).',
+        'Delivered an end-to-end IoT gas-detection system with real-time dashboarding.'
+    },
+
+    // ——— EXPERIENCE ———
+    {
+        type: 'experience',
+        title: 'Embedded Systems Engineer',
+        institution: 'Tech Innovations Inc.',
+        period: '2023 – Present',
+        description:
+        'Develop IoT firmware and edge software for industrial devices (sensors, data acquisition).',
+        'Implement real-time tasks, drivers, and communication stacks; optimize latency and reliability.',
+        'Collaborate on bring-up/validation; document specs, test plans, and results.'
     },
     {
-      type: 'experience',
-      title: 'MIT',
-      institution: 'Tech Innovations Inc.',
-      period: '2023 - Present',
-      description: 'Developing IoT solutions and embedded firmware for industrial applications.'
+        type: 'experience',
+        title: 'Research Assistant',
+        institution: 'University Lab',
+        period: '2022 – 2023',
+        description:
+        'Conducted FPGA-based signal processing research with real-time constraints.',
+        'Prototyped RTL blocks and evaluation pipelines for time-series signals.'
+    },
+
+    // ——— TRAINING / TRAINEESHIPS ———
+    {
+        type: 'experience',
+        title: 'Analog IC Design Trainee',
+        institution: 'Mentored by Dr. Huy Binh (Senior Analog Engineer, Apple, UK)',
+        period: 'Apr 2025 – Present',
+        description:
+        'Practiced op-amp topologies (CS/CG/CD, telescopic/folded), biasing, stability/PSRR, mismatch.',
+        'Ran corners/Monte Carlo; analyzed gm/ro trade-offs and layout-aware considerations.'
     },
     {
-      type: 'experience',
-      title: 'Embedded Systems Engineer',
-      institution: 'Tech Innovations Inc.',
-      period: '2023 - Present',
-      description: 'Developing IoT solutions and embedded firmware for industrial applications.'
+        type: 'experience',
+        title: 'RF Design Trainee',
+        institution: 'Mentored by Doan Hung (Bosch Vietnam)',
+        period: 'Jun 2024 – Dec 2024',
+        description:
+        'Explored 1–3 GHz fundamentals: R/L/C parasitics, transmission lines, PCB effects.',
+        'Practiced matching, S-parameter interpretation, and measurement workflows.'
+    },
+
+    // ——— COURSES / CERTIFICATIONS ———
+    {
+        type: 'education',
+        title: 'AI & Machine Learning Certification',
+        institution: 'Online Program',
+        period: '2022 – 2023',
+        description:
+        'Computer vision and neural networks; model training, evaluation, and deployment basics.'
     },
     {
-      type: 'education',
-      title: 'AI & Machine Learning Certification',
-      institution: 'Online Platform',
-      period: '2022 - 2023',
-      description: 'Completed advanced courses in computer vision and neural network implementation.'
+        type: 'education',
+        title: 'AIDE – MLOps & Data (6-month program)',
+        institution: 'AIDE',
+        period: '2024',
+        description:
+        'Data pipelines, versioning, CI/CD for ML, experiment tracking, and model packaging.'
     },
     {
-      type: 'experience',
-      title: 'Research Assistant',
-      institution: 'University Lab',
-      period: '2022 - 2023',
-      description: 'Conducted research on FPGA-based signal processing and real-time systems.'
+        type: 'education',
+        title: 'AIO – Machine Learning / Deep Learning',
+        institution: 'AIO',
+        period: '2024',
+        description:
+        'Supervised learning, CNNs, training workflows, and practical deployment patterns.'
+    },
+    {
+        type: 'education',
+        title: 'Neural Signal Processing & Time–Frequency Methods',
+        institution: 'Specialized Short Course',
+        period: '2024',
+        description:
+        'Time-series denoising/feature extraction; STFT/wavelets for physiological signals (ECG/EEG/PPG).'
     }
   ]
 
