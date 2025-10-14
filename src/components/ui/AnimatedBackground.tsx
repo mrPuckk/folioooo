@@ -45,7 +45,7 @@ export function AnimatedBackground({ className = '', variant = 'default' }: Anim
         transition={{
           duration: 8,
           repeat: Infinity,
-          ease: 'easeInOut',
+          ease: [0.4, 0, 0.6, 1],
           delay: 3
         }}
       />

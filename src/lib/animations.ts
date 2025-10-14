@@ -75,7 +75,7 @@ export const backgroundFloat = {
   transition: {
     duration: 12,
     repeat: Infinity,
-    ease: 'easeInOut'
+    ease: [0.4, 0, 0.6, 1]
   }
 }
 
@@ -89,6 +89,6 @@ export const backgroundFloatReverse = {
   transition: {
     duration: 15,
     repeat: Infinity,
-    ease: 'easeInOut'
+    ease: [0.4, 0, 0.6, 1]
   }
 }
