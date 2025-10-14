@@ -184,9 +184,60 @@ export function DraggableProjectsCard({
         damping: 30
       }}
     >
-      <Card className="shadow-lg border-2 border-border/50 bg-background/95 backdrop-blur-sm">
-        <CardHeader className="pb-3">
-          <div className="flex items-center justify-between">
+      <Card className={`shadow-lg border-2 border-border/50 bg-background/95 backdrop-blur-sm transition-all duration-300 ${
+        isMinimized ? 'sm:rounded-lg rounded-full w-12 h-12 sm:w-auto sm:h-auto' : 'rounded-lg'
+      }`}>
+        <CardHeader className={`transition-all duration-300 ${
+          isMinimized ? 'sm:pb-3 pb-0 p-0 sm:p-6' : 'pb-3'
+        }`}>
+          {/* Mobile: Circular minimized state */}
+          <div className={`sm:hidden ${isMinimized ? 'flex items-center justify-center w-12 h-12' : 'flex items-center justify-between'}`}>
+            {isMinimized ? (
+              <Button 
+                variant="ghost" 
+                size="sm" 
+                className="h-12 w-12 p-0 rounded-full touch-manipulation"
+                onClick={toggleMinimize}
+                title="Expand"
+              >
+                <div className="h-3 w-3 rounded-full bg-primary" />
+              </Button>
+            ) : (
+              <div className="flex items-center justify-between w-full">
+                <div className="flex items-center gap-2">
+                  <GripVertical className="h-4 w-4 text-muted-foreground cursor-grab" />
+                  <CardTitle className="text-sm font-medium">Projects</CardTitle>
+                </div>
+                <div className="flex items-center gap-1">
+                  <Button 
+                    variant="ghost" 
+                    size="sm" 
+                    className="h-7 w-7 p-0 touch-manipulation"
+                    onClick={toggleMinimize}
+                    title="Minimize"
+                  >
+                    <div className="h-2.5 w-2.5 rounded-full bg-primary" />
+                  </Button>
+                  <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                      <Button variant="ghost" size="sm" className="h-7 w-7 p-0 touch-manipulation">
+                        <MoreVertical className="h-3 w-3" />
+                      </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent align="end">
+                      <DropdownMenuItem onClick={resetPosition} className="text-xs">
+                        <RotateCcw className="h-3 w-3 mr-2" />
+                        Reset position
+                      </DropdownMenuItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* Desktop: Original layout */}
+          <div className="hidden sm:flex items-center justify-between">
             <div className="flex items-center gap-2">
               <GripVertical className="h-4 w-4 text-muted-foreground cursor-grab" />
               <CardTitle className="text-sm font-medium">Projects</CardTitle>
@@ -195,23 +246,15 @@ export function DraggableProjectsCard({
               <Button 
                 variant="ghost" 
                 size="sm" 
-                className="h-7 w-7 p-0 sm:h-6 sm:w-6 md:h-6 md:w-6 touch-manipulation"
+                className="h-6 w-6 p-0"
                 onClick={toggleMinimize}
                 title={isMinimized ? "Expand" : "Minimize"}
               >
-                {/* Mobile: Small circle, Desktop: Chevron icons */}
-                <div className="sm:hidden">
-                  <div className={`h-2.5 w-2.5 rounded-full transition-colors ${
-                    isMinimized ? 'bg-muted-foreground' : 'bg-primary'
-                  }`} />
-                </div>
-                <div className="hidden sm:block">
-                  {isMinimized ? <ChevronUp className="h-3 w-3" /> : <ChevronDown className="h-3 w-3" />}
-                </div>
+                {isMinimized ? <ChevronUp className="h-3 w-3" /> : <ChevronDown className="h-3 w-3" />}
               </Button>
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" size="sm" className="h-7 w-7 p-0 sm:h-6 sm:w-6 touch-manipulation">
+                  <Button variant="ghost" size="sm" className="h-6 w-6 p-0">
                     <MoreVertical className="h-3 w-3" />
                   </Button>
                 </DropdownMenuTrigger>
