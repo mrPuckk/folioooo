@@ -5,7 +5,9 @@ import { Container } from '@/components/ui/Container'
 import { Section } from '@/components/ui/Section'
 import { Button } from '@/components/ui/Button'
 import { Card } from '@/components/ui/Card'
-import { RefreshCw, Mail, Calendar, Users } from 'lucide-react'
+import { RefreshCw, Mail, Calendar, Users, LogOut } from 'lucide-react'
+import { ProtectedRoute } from '@/components/ProtectedRoute'
+import { useAuth } from '@/context/AuthContext'
 
 interface EmailData {
   email: string
@@ -19,10 +21,11 @@ interface ApiResponse {
   details: EmailData[]
 }
 
-export default function AdminPage() {
+function AdminPageContent() {
   const [emails, setEmails] = useState<ApiResponse | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
+  const { logout } = useAuth()
 
   const fetchEmails = async () => {
     try {
@@ -63,10 +66,16 @@ export default function AdminPage() {
                   View and manage submitted email requests
                 </p>
               </div>
-              <Button onClick={fetchEmails} disabled={loading}>
-                <RefreshCw className={`w-4 h-4 mr-2 ${loading ? 'animate-spin' : ''}`} />
-                Refresh
-              </Button>
+              <div className="flex items-center space-x-3">
+                <Button onClick={fetchEmails} disabled={loading}>
+                  <RefreshCw className={`w-4 h-4 mr-2 ${loading ? 'animate-spin' : ''}`} />
+                  Refresh
+                </Button>
+                <Button onClick={logout} variant="outline">
+                  <LogOut className="w-4 h-4 mr-2" />
+                  Logout
+                </Button>
+              </div>
             </div>
 
             {loading && (
@@ -153,5 +162,13 @@ export default function AdminPage() {
         </Container>
       </Section>
     </div>
+  )
+}
+
+export default function AdminPage() {
+  return (
+    <ProtectedRoute>
+      <AdminPageContent />
+    </ProtectedRoute>
   )
 }

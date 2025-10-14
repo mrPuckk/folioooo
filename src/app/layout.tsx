@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import { Layout } from '@/components/Layout'
+import { AuthProvider } from '@/context/AuthContext'
 import '@/styles/globals.css'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -76,9 +77,11 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
-        <Layout>
-          {children}
-        </Layout>
+        <AuthProvider>
+          <Layout>
+            {children}
+          </Layout>
+        </AuthProvider>
       </body>
     </html>
   )
