@@ -18,6 +18,7 @@ export function Hero() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [isDialogOpen, setIsDialogOpen] = useState(false)
+  const [error, setError] = useState('')
 
   const scrollToProjects = () => {
     const projectsSection = document.getElementById('projects')
@@ -29,6 +30,7 @@ export function Hero() {
   const handleEmailSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsSubmitting(true)
+    setError('')
 
     try {
       const response = await fetch('/api/cv-request', {
@@ -44,6 +46,7 @@ export function Hero() {
       if (response.ok) {
         setIsSubmitted(true)
         setEmail('')
+        setError('')
         // Close dialog after 2 seconds
         setTimeout(() => {
           setIsDialogOpen(false)
@@ -52,12 +55,12 @@ export function Hero() {
       } else {
         // Handle specific error messages from the API
         const errorMessage = data.error || 'Failed to submit email'
-        throw new Error(errorMessage)
+        setError(errorMessage)
       }
     } catch (error) {
       console.error('Error submitting email:', error)
       const errorMessage = error instanceof Error ? error.message : 'Network error. Please check your connection and try again.'
-      alert(`Failed to submit email: ${errorMessage}`)
+      setError(errorMessage)
     } finally {
       setIsSubmitting(false)
     }
@@ -173,6 +176,11 @@ export function Hero() {
                         className="w-full"
                       />
                     </div>
+                    {error && (
+                      <div className="text-red-600 text-sm bg-red-50 p-3 rounded-lg border border-red-200">
+                        {error}
+                      </div>
+                    )}
                     <Button 
                       type="submit" 
                       className="w-full" 
