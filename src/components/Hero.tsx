@@ -2,9 +2,10 @@
 
 import { motion } from 'framer-motion'
 import { Button } from '@/components/ui/Button'
-import { Download } from 'lucide-react'
+import { Mail } from 'lucide-react'
 import { AnimatedBackground } from '@/components/ui/AnimatedBackground'
 import { staggerContainer, staggerItem, buttonHover } from '@/lib/animations'
+import { SOCIAL_LINKS } from '@/lib/constants'
 interface HeroProps {
   // No projects needed in Hero anymore since we have the draggable card
 }
@@ -17,13 +18,11 @@ export function Hero() {
     }
   }
 
-  const downloadCV = () => {
-    const link = document.createElement('a')
-    link.href = '/cv.pdf'
-    link.download = 'Tuong-Phung-CV.pdf'
-    document.body.appendChild(link)
-    link.click()
-    document.body.removeChild(link)
+  const requestCV = () => {
+    const subject = encodeURIComponent('CV Request - Portfolio Inquiry')
+    const body = encodeURIComponent('Hello Tuong,\n\nI would like to request a copy of your CV. Please find my details below:\n\nName:\nCompany:\nPosition:\n\nThank you for your time.\n\nBest regards,')
+    const email = SOCIAL_LINKS[0].url.replace('mailto:', '')
+    window.open(`mailto:${email}?subject=${subject}&body=${body}`)
   }
 
 
@@ -97,13 +96,13 @@ export function Hero() {
             
             <motion.div {...buttonHover}>
               <Button 
-                onClick={downloadCV}
+                onClick={requestCV}
                 variant="outline"
                 size="lg"
                 className="group w-full sm:w-auto text-lg px-14 py-6 font-medium rounded-full shadow-lg elegant-button border-2 hover:border-primary/50"
               >
-                <Download className="w-5 h-5 mr-3 group-hover:animate-bounce" />
-                Download CV
+                <Mail className="w-5 h-5 mr-3 group-hover:animate-bounce" />
+                Please kindly request for my CV via email
               </Button>
             </motion.div>
           </motion.div>
