@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import { Switch } from '@/components/ui/switch'
 import { Moon, Sun } from 'lucide-react'
 import { Navigation } from '@/components/layout/Navigation'
+import { MobileNavigation } from '@/components/layout/MobileNavigation'
 import Link from 'next/link'
 import { SITE_CONFIG } from '@/lib/constants'
 
@@ -75,6 +76,9 @@ export function Layout({ children }: LayoutProps) {
               {/* Navigation */}
               <Navigation />
 
+              {/* Mobile Navigation */}
+              <MobileNavigation />
+
               {/* Theme Toggle - Show default state during hydration */}
               <div className="flex items-center space-x-4">
                 <div className="flex items-center space-x-2">
@@ -114,6 +118,9 @@ export function Layout({ children }: LayoutProps) {
 
             {/* Navigation */}
             <Navigation />
+
+            {/* Mobile Navigation */}
+            <MobileNavigation />
 
             {/* Theme Toggle */}
             <div className="flex items-center space-x-4">
