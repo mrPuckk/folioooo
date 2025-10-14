@@ -1,18 +1,21 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { sql } from '@vercel/postgres'
+import { initializeDatabase } from '@/lib/database'
 
-// In-memory storage for Vercel (serverless functions)
-// Note: This will reset on each deployment, but works for demo purposes
-let emailStorage: string[] = []
+// Initialize database on first request
+let dbInitialized = false
 
-// For production, you should use a proper database like:
-// - Vercel Postgres
-// - Supabase
-// - PlanetScale
-// - MongoDB Atlas
-// - Firebase Firestore
+async function ensureDatabaseInitialized() {
+  if (!dbInitialized) {
+    await initializeDatabase()
+    dbInitialized = true
+  }
+}
 
 export async function POST(request: NextRequest) {
   try {
+    await ensureDatabaseInitialized()
+    
     const { email } = await request.json()
 
     // Validate email
@@ -33,24 +36,34 @@ export async function POST(request: NextRequest) {
     }
 
     // Check if email already exists
-    if (emailStorage.includes(email.toLowerCase())) {
+    const existingEmail = await sql`
+      SELECT id FROM cv_requests WHERE email = ${email.toLowerCase()}
+    `
+
+    if (existingEmail.rows.length > 0) {
       return NextResponse.json(
         { error: 'Email already exists' },
         { status: 409 }
       )
     }
 
-    // Add new email to in-memory storage
-    emailStorage.push(email.toLowerCase())
+    // Insert new email
+    await sql`
+      INSERT INTO cv_requests (email) VALUES (${email.toLowerCase()})
+    `
+
+    // Get total count
+    const countResult = await sql`SELECT COUNT(*) as count FROM cv_requests`
+    const totalCount = parseInt(countResult.rows[0].count)
 
     // Log the request
     console.log(`New CV request from: ${email}`)
-    console.log(`Total emails stored: ${emailStorage.length}`)
+    console.log(`Total emails in database: ${totalCount}`)
 
     return NextResponse.json(
       { 
         message: 'Email submitted successfully',
-        count: emailStorage.length 
+        count: totalCount 
       },
       { status: 200 }
     )
@@ -64,13 +77,22 @@ export async function POST(request: NextRequest) {
   }
 }
 
-// Optional: GET endpoint to view all emails (for admin purposes)
+// GET endpoint to view all emails (for admin purposes)
 export async function GET() {
   try {
+    await ensureDatabaseInitialized()
+    
+    const result = await sql`
+      SELECT email, created_at 
+      FROM cv_requests 
+      ORDER BY created_at DESC
+    `
+
     return NextResponse.json({
-      emails: emailStorage,
-      count: emailStorage.length,
-      lastUpdated: new Date().toISOString()
+      emails: result.rows.map(row => row.email),
+      count: result.rows.length,
+      lastUpdated: new Date().toISOString(),
+      details: result.rows
     }, { status: 200 })
   } catch (error) {
     console.error('Error reading emails:', error)
