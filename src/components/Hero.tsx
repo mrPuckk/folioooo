@@ -1,16 +1,24 @@
 'use client'
 
+import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { Button } from '@/components/ui/Button'
-import { Mail } from 'lucide-react'
+import { Mail, FileText } from 'lucide-react'
 import { AnimatedBackground } from '@/components/ui/AnimatedBackground'
 import { staggerContainer, staggerItem, buttonHover } from '@/lib/animations'
-import { SOCIAL_LINKS } from '@/lib/constants'
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/Dialog'
+import { Input } from '@/components/ui/Input'
+import { Label } from '@/components/ui/Label'
 interface HeroProps {
   // No projects needed in Hero anymore since we have the draggable card
 }
 
 export function Hero() {
+  const [email, setEmail] = useState('')
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [isSubmitted, setIsSubmitted] = useState(false)
+  const [isDialogOpen, setIsDialogOpen] = useState(false)
+
   const scrollToProjects = () => {
     const projectsSection = document.getElementById('projects')
     if (projectsSection) {
@@ -18,11 +26,36 @@ export function Hero() {
     }
   }
 
-  const requestCV = () => {
-    const subject = encodeURIComponent('CV Request - Portfolio Inquiry')
-    const body = encodeURIComponent('Hello Tuong,\n\nI would like to request a copy of your CV. Please find my details below:\n\nName:\nCompany:\nPosition:\n\nThank you for your time.\n\nBest regards,')
-    const email = SOCIAL_LINKS[0].url.replace('mailto:', '')
-    window.open(`mailto:${email}?subject=${subject}&body=${body}`)
+  const handleEmailSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setIsSubmitting(true)
+
+    try {
+      const response = await fetch('/api/cv-request', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email }),
+      })
+
+      if (response.ok) {
+        setIsSubmitted(true)
+        setEmail('')
+        // Close dialog after 2 seconds
+        setTimeout(() => {
+          setIsDialogOpen(false)
+          setIsSubmitted(false)
+        }, 2000)
+      } else {
+        throw new Error('Failed to submit email')
+      }
+    } catch (error) {
+      console.error('Error submitting email:', error)
+      alert('Failed to submit email. Please try again.')
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
 
@@ -94,17 +127,58 @@ export function Hero() {
               />
             </Button>
             
-            <motion.div {...buttonHover}>
-              <Button 
-                onClick={requestCV}
-                variant="outline"
-                size="lg"
-                className="group w-full sm:w-auto text-lg px-14 py-6 font-medium rounded-full shadow-lg elegant-button border-2 hover:border-primary/50"
-              >
-                <Mail className="w-5 h-5 mr-3 group-hover:animate-bounce" />
-                Please kindly request for my CV via email
-              </Button>
-            </motion.div>
+            <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+              <DialogTrigger asChild>
+                <motion.div {...buttonHover}>
+                  <Button 
+                    variant="outline"
+                    size="lg"
+                    className="group w-full sm:w-auto text-lg px-14 py-6 font-medium rounded-full shadow-lg elegant-button border-2 hover:border-primary/50"
+                  >
+                    <FileText className="w-5 h-5 mr-3 group-hover:animate-bounce" />
+                    My CV
+                  </Button>
+                </motion.div>
+              </DialogTrigger>
+              <DialogContent className="sm:max-w-md">
+                <DialogHeader>
+                  <DialogTitle className="text-center">Request My CV</DialogTitle>
+                </DialogHeader>
+                {isSubmitted ? (
+                  <div className="text-center py-8">
+                    <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                      <Mail className="w-8 h-8 text-green-600" />
+                    </div>
+                    <h3 className="text-lg font-semibold text-green-600 mb-2">Thank you!</h3>
+                    <p className="text-muted-foreground">
+                      Your email has been submitted. I'll send you my CV shortly.
+                    </p>
+                  </div>
+                ) : (
+                  <form onSubmit={handleEmailSubmit} className="space-y-4">
+                    <div className="space-y-2">
+                      <Label htmlFor="email">Email Address</Label>
+                      <Input
+                        id="email"
+                        type="email"
+                        placeholder="your.email@example.com"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        required
+                        className="w-full"
+                      />
+                    </div>
+                    <Button 
+                      type="submit" 
+                      className="w-full" 
+                      disabled={isSubmitting}
+                    >
+                      {isSubmitting ? 'Submitting...' : 'Request CV'}
+                    </Button>
+                  </form>
+                )}
+              </DialogContent>
+            </Dialog>
           </motion.div>
         </motion.div>
       </div>
