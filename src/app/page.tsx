@@ -9,6 +9,8 @@ import { PortfolioUpdateNotice } from '@/components/PortfolioUpdateNotice'
 import { DraggableProjectsCard } from '@/components/DraggableProjectsCard'
 import { AnimatedBackground } from '@/components/ui/AnimatedBackground'
 import { SectionHeader } from '@/components/ui/SectionHeader'
+import { Container } from '@/components/ui/Container'
+import { Section } from '@/components/ui/Section'
 import { SITE_CONFIG, SOCIAL_LINKS } from '@/lib/constants'
 import { staggerContainer, staggerItem, buttonHover } from '@/lib/animations'
 import { DEFAULT_PROJECT_STATUSES, PROJECT_STATUS_CONFIG } from '@/config/projectStatusConfig'
@@ -33,26 +35,24 @@ export default function Home() {
       />
 
       {/* Hero Section */}
-      <section id="home">
+      <Section id="home" fullHeight>
         <Hero />
-      </section>
+      </Section>
 
       {/* About Section */}
-      <section id="about">
+      <Section id="about">
         <About />
-      </section>
+      </Section>
 
       {/* Projects Section */}
-      <section id="projects">
+      <Section id="projects">
         <ProjectsGrid />
-      </section>
+      </Section>
 
       {/* Enhanced Contact Section */}
-      <section id="contact" className="relative py-20 px-4 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-background via-background/95 to-background/90" />
+      <Section id="contact" background="gradient" className="overflow-hidden">
         <AnimatedBackground />
-
-        <div className="container mx-auto text-center relative z-10">
+        <Container className="text-center relative z-10">
           <SectionHeader title="Get In Touch" />
           
           <motion.div 
@@ -91,15 +91,12 @@ export default function Home() {
               </motion.div>
             </motion.div>
           </motion.div>
-        </div>
-      </section>
+        </Container>
+      </Section>
 
       {/* Enhanced Footer */}
-      <footer className="py-12 px-4 border-t border-border relative overflow-hidden">
-        {/* Footer background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-background via-background/95 to-background/90" />
-        
-        <div className="container mx-auto text-center relative z-10">
+      <Section background="gradient" className="border-t border-border overflow-hidden">
+        <Container className="text-center relative z-10">
           <div className="flex justify-center mb-6">
             {SOCIAL_LINKS.map((social) => (
               <a
@@ -117,8 +114,8 @@ export default function Home() {
           <p className="text-muted-foreground">
             © 2024 Tuong Portfolio - code by Tuong Phung with stacks: Next.js + React + TypeScript + Tailwind + Framer Motion + shadcn/ui. All rights reserved.
           </p>
-        </div>
-      </footer>
+        </Container>
+      </Section>
     </div>
   )
 } 

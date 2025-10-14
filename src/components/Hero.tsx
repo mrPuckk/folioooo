@@ -1,24 +1,54 @@
 'use client'
 
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { motion } from 'framer-motion'
 import { Button } from '@/components/ui/Button'
 import { Mail, FileText } from 'lucide-react'
 import { AnimatedBackground } from '@/components/ui/AnimatedBackground'
+import { ErrorMessage } from '@/components/ui/ErrorMessage'
 import { staggerContainer, staggerItem, buttonHover } from '@/lib/animations'
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/Dialog'
 import { Input } from '@/components/ui/Input'
 import { Label } from '@/components/ui/Label'
+import { useFormSubmission } from '@/hooks/useFormSubmission'
+import { Container } from '@/components/ui/Container'
+import { Section } from '@/components/ui/Section'
+import { FormState } from '@/types'
+
 interface HeroProps {
   // No projects needed in Hero anymore since we have the draggable card
 }
 
 export function Hero() {
   const [email, setEmail] = useState('')
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [isSubmitted, setIsSubmitted] = useState(false)
   const [isDialogOpen, setIsDialogOpen] = useState(false)
-  const [error, setError] = useState('')
+
+  const submitEmail = async (data: { email: string }) => {
+    console.log('Submitting email:', data.email)
+    
+    const response = await fetch('/api/cv-request', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    })
+
+    const result = await response.json()
+    console.log('API Response:', { status: response.status, result })
+
+    if (!response.ok) {
+      // Handle specific error messages from the API
+      const errorMessage = result.error || 'Failed to submit email'
+      console.log('API Error:', errorMessage)
+      throw new Error(errorMessage)
+    }
+
+    console.log('Email submitted successfully')
+    return result
+  }
+
+  const { formState, submit, reset } = useFormSubmission(submitEmail)
 
   const scrollToProjects = () => {
     const projectsSection = document.getElementById('projects')
@@ -29,42 +59,19 @@ export function Hero() {
 
   const handleEmailSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    setIsSubmitting(true)
-    setError('')
-
-    try {
-      const response = await fetch('/api/cv-request', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email }),
-      })
-
-      const data = await response.json()
-
-      if (response.ok) {
-        setIsSubmitted(true)
-        setEmail('')
-        setError('')
-        // Close dialog after 2 seconds
-        setTimeout(() => {
-          setIsDialogOpen(false)
-          setIsSubmitted(false)
-        }, 2000)
-      } else {
-        // Handle specific error messages from the API
-        const errorMessage = data.error || 'Failed to submit email'
-        setError(errorMessage)
-      }
-    } catch (error) {
-      console.error('Error submitting email:', error)
-      const errorMessage = error instanceof Error ? error.message : 'Network error. Please check your connection and try again.'
-      setError(errorMessage)
-    } finally {
-      setIsSubmitting(false)
-    }
+    await submit({ email })
   }
+
+  // Handle success state changes
+  React.useEffect(() => {
+    if (formState.isSubmitted) {
+      setEmail('')
+      setTimeout(() => {
+        setIsDialogOpen(false)
+        reset()
+      }, 2000)
+    }
+  }, [formState.isSubmitted, reset])
 
 
   return (
@@ -152,7 +159,7 @@ export function Hero() {
                 <DialogHeader>
                   <DialogTitle className="text-center">Request My CV</DialogTitle>
                 </DialogHeader>
-                {isSubmitted ? (
+                {formState.isSubmitted ? (
                   <div className="text-center py-8">
                     <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
                       <Mail className="w-8 h-8 text-green-600" />
@@ -176,17 +183,13 @@ export function Hero() {
                         className="w-full"
                       />
                     </div>
-                    {error && (
-                      <div className="text-red-600 text-sm bg-red-50 p-3 rounded-lg border border-red-200">
-                        {error}
-                      </div>
-                    )}
+                    <ErrorMessage error={formState.error} />
                     <Button 
                       type="submit" 
                       className="w-full" 
-                      disabled={isSubmitting}
+                      disabled={formState.isSubmitting}
                     >
-                      {isSubmitting ? 'Submitting...' : 'Request CV'}
+                      {formState.isSubmitting ? 'Submitting...' : 'Request CV'}
                     </Button>
                   </form>
                 )}

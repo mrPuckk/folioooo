@@ -8,10 +8,15 @@
     "start": "next start",
     "lint": "next lint",
     "lint:fix": "next lint --fix",
+    "type-check": "tsc --noEmit",
     "analyze": "ANALYZE=true npm run build",
     "build:prod": "NODE_ENV=production npm run build",
     "clean": "rm -rf .next out",
-    "clean:install": "rm -rf node_modules package-lock.json && npm install"
+    "clean:install": "rm -rf node_modules package-lock.json && npm install",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test": "echo \"No tests specified\" && exit 0",
+    "preview": "npm run build && npm run start"
   },
   "dependencies": {
     "@radix-ui/react-dialog": "^1.1.15",
