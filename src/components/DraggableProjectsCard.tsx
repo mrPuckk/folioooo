@@ -195,15 +195,23 @@ export function DraggableProjectsCard({
               <Button 
                 variant="ghost" 
                 size="sm" 
-                className="h-6 w-6 p-0"
+                className="h-7 w-7 p-0 sm:h-6 sm:w-6 md:h-6 md:w-6 touch-manipulation"
                 onClick={toggleMinimize}
                 title={isMinimized ? "Expand" : "Minimize"}
               >
-                {isMinimized ? <ChevronUp className="h-3 w-3" /> : <ChevronDown className="h-3 w-3" />}
+                {/* Mobile: Small circle, Desktop: Chevron icons */}
+                <div className="sm:hidden">
+                  <div className={`h-2.5 w-2.5 rounded-full transition-colors ${
+                    isMinimized ? 'bg-muted-foreground' : 'bg-primary'
+                  }`} />
+                </div>
+                <div className="hidden sm:block">
+                  {isMinimized ? <ChevronUp className="h-3 w-3" /> : <ChevronDown className="h-3 w-3" />}
+                </div>
               </Button>
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" size="sm" className="h-6 w-6 p-0">
+                  <Button variant="ghost" size="sm" className="h-7 w-7 p-0 sm:h-6 sm:w-6 touch-manipulation">
                     <MoreVertical className="h-3 w-3" />
                   </Button>
                 </DropdownMenuTrigger>
