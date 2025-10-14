@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { Container } from '@/components/ui/Container'
 import { Card } from '@/components/ui/Card'
@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/Button'
 import { Input } from '@/components/ui/Input'
 import { Label } from '@/components/ui/Label'
 import { Section } from '@/components/ui/Section'
+import { useAuth } from '@/context/AuthContext'
 import { Lock, User, Eye, EyeOff } from 'lucide-react'
 
 export default function LoginPage() {
@@ -17,6 +18,14 @@ export default function LoginPage() {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
   const router = useRouter()
+  const { login, isAuthenticated, loading: authLoading } = useAuth()
+
+  // Redirect if already authenticated
+  useEffect(() => {
+    if (!authLoading && isAuthenticated) {
+      router.push('/admin')
+    }
+  }, [isAuthenticated, authLoading, router])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -35,9 +44,8 @@ export default function LoginPage() {
       const data = await response.json()
 
       if (response.ok) {
-        // Store auth token in localStorage
-        localStorage.setItem('authToken', data.token)
-        localStorage.setItem('isAuthenticated', 'true')
+        // Use AuthContext login function to update state
+        login(data.token)
         
         // Redirect to admin page
         router.push('/admin')
@@ -49,6 +57,18 @@ export default function LoginPage() {
     } finally {
       setLoading(false)
     }
+  }
+
+  // Show loading while checking authentication
+  if (authLoading) {
+    return (
+      <div className="min-h-screen bg-background text-foreground flex items-center justify-center">
+        <div className="text-center">
+          <div className="w-8 h-8 border-2 border-primary border-t-transparent rounded-full animate-spin mx-auto mb-4" />
+          <p className="text-muted-foreground">Loading...</p>
+        </div>
+      </div>
+    )
   }
 
   return (
