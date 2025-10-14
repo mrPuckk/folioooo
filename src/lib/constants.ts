@@ -13,23 +13,8 @@ export const SITE_CONFIG = {
 
 export const SOCIAL_LINKS = [
   {
-    name: 'GitHub',
-    url: 'https://github.com/tuongphung',
-    icon: 'github'
-  },
-  {
-    name: 'LinkedIn',
-    url: 'https://linkedin.com/in/tuongphung',
-    icon: 'linkedin'
-  },
-  {
-    name: 'Twitter',
-    url: 'https://twitter.com/tuongphung',
-    icon: 'twitter'
-  },
-  {
-    name: 'Email',
-    url: 'mailto:tuong.phung@example.com',
+    name: 'tuongphungquang@gmail.com',
+    url: 'mailto:tuongphungquang@gmail.com',
     icon: 'email'
   }
 ] 

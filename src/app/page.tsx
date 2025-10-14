@@ -104,21 +104,22 @@ export default function Home() {
         <div className="absolute inset-0 bg-gradient-to-br from-background via-background/95 to-background/90" />
         
         <div className="container mx-auto text-center relative z-10">
-          <div className="flex justify-center space-x-6 mb-6">
+          <div className="flex justify-center mb-6">
             {SOCIAL_LINKS.map((social) => (
               <a
                 key={social.name}
                 href={social.url}
-                className="text-muted-foreground hover:text-foreground transition-colors hover:scale-110 transform duration-200"
+                className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-primary/10 to-secondary/10 border border-primary/20 rounded-full text-primary hover:from-primary/20 hover:to-secondary/20 hover:border-primary/30 transition-all duration-300 hover:scale-105 transform font-medium shadow-lg hover:shadow-xl"
                 target="_blank"
                 rel="noopener noreferrer"
               >
+                <span className="mr-2">📧</span>
                 {social.name}
               </a>
             ))}
           </div>
           <p className="text-muted-foreground">
-            © 2024 {SITE_CONFIG.name}. All rights reserved.
+            © 2024 Tuong Portfolio - code by Tuong Phung with stacks: Next.js + React + TypeScript + Tailwind + Framer Motion + shadcn/ui. All rights reserved.
           </p>
         </div>
       </footer>
