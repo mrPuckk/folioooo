@@ -19,24 +19,31 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     // Check if user is authenticated on mount
-    const token = localStorage.getItem('authToken')
-    const authStatus = localStorage.getItem('isAuthenticated')
-    
-    if (token && authStatus === 'true') {
-      setIsAuthenticated(true)
+    // Only access localStorage on the client side
+    if (typeof window !== 'undefined') {
+      const token = localStorage.getItem('authToken')
+      const authStatus = localStorage.getItem('isAuthenticated')
+      
+      if (token && authStatus === 'true') {
+        setIsAuthenticated(true)
+      }
     }
     setLoading(false)
   }, [])
 
   const login = (token: string) => {
-    localStorage.setItem('authToken', token)
-    localStorage.setItem('isAuthenticated', 'true')
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('authToken', token)
+      localStorage.setItem('isAuthenticated', 'true')
+    }
     setIsAuthenticated(true)
   }
 
   const logout = () => {
-    localStorage.removeItem('authToken')
-    localStorage.removeItem('isAuthenticated')
+    if (typeof window !== 'undefined') {
+      localStorage.removeItem('authToken')
+      localStorage.removeItem('isAuthenticated')
+    }
     setIsAuthenticated(false)
     router.push('/login')
   }
