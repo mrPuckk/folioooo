@@ -67,7 +67,7 @@ export function MobileNavigation() {
       <div className="md:hidden">
         <button
           onClick={toggleMenu}
-          className="p-2 rounded-lg bg-background border border-border shadow-lg hover:bg-muted/50 transition-colors"
+          className="p-2 rounded-lg bg-background border border-border shadow-lg hover:bg-muted/50 transition-colors md:bg-background/95 md:backdrop-blur"
           aria-label="Toggle navigation menu"
         >
           <motion.div
