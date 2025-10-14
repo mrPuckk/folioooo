@@ -103,18 +103,22 @@ export function MobileNavigation() {
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: '100%' }}
               transition={{ duration: 0.3, ease: 'easeOut' }}
-              className="fixed top-0 right-0 h-full w-80 max-w-[85vw] bg-white dark:bg-gray-900 border-l border-border shadow-2xl z-50 md:hidden"
+              className="fixed top-0 right-0 h-full w-80 max-w-[85vw] border-l border-gray-200 dark:border-gray-700 shadow-2xl z-50 md:hidden"
+              style={{
+                backgroundColor: 'white',
+                color: 'black'
+              }}
             >
               <div className="flex flex-col h-full">
                 {/* Menu Header */}
-                <div className="flex items-center justify-between p-6 border-b border-border bg-muted/30">
-                  <h2 className="text-lg font-semibold text-foreground">Navigation</h2>
+                <div className="flex items-center justify-between p-6 border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800">
+                  <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100">Navigation</h2>
                   <button
                     onClick={toggleMenu}
-                    className="p-2 rounded-lg hover:bg-muted/50 transition-colors"
+                    className="p-2 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
                     aria-label="Close menu"
                   >
-                    <X className="h-5 w-5 text-muted-foreground" />
+                    <X className="h-5 w-5 text-gray-600 dark:text-gray-400" />
                   </button>
                 </div>
 
@@ -138,15 +142,15 @@ export function MobileNavigation() {
                               <div
                                 className={`flex items-center space-x-3 px-4 py-3 rounded-lg transition-colors ${
                                   isActive
-                                    ? 'bg-primary/15 text-primary border border-primary/30 shadow-sm'
-                                    : 'text-foreground hover:text-primary hover:bg-muted/60'
+                                    ? 'bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-400 border border-blue-200 dark:border-blue-700 shadow-sm'
+                                    : 'text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-100 dark:hover:bg-gray-700'
                                 }`}
                               >
                                 <Icon className="h-5 w-5" />
                                 <span className="font-medium">{item.name}</span>
                                 {isActive && (
                                   <motion.div
-                                    className="ml-auto w-2 h-2 rounded-full bg-primary"
+                                    className="ml-auto w-2 h-2 rounded-full bg-blue-600 dark:bg-blue-400"
                                     layoutId="mobileActiveIndicator"
                                     initial={{ opacity: 0, scale: 0 }}
                                     animate={{ opacity: 1, scale: 1 }}
@@ -160,15 +164,15 @@ export function MobileNavigation() {
                               onClick={() => scrollToSection(item.href)}
                               className={`w-full flex items-center space-x-3 px-4 py-3 rounded-lg transition-colors text-left ${
                                 isActive
-                                  ? 'bg-primary/15 text-primary border border-primary/30 shadow-sm'
-                                  : 'text-foreground hover:text-primary hover:bg-muted/60'
+                                  ? 'bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-400 border border-blue-200 dark:border-blue-700 shadow-sm'
+                                  : 'text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-100 dark:hover:bg-gray-700'
                               }`}
                             >
                               <Icon className="h-5 w-5" />
                               <span className="font-medium">{item.name}</span>
                               {isActive && (
-                                <motion.div
-                                  className="ml-auto w-2 h-2 rounded-full bg-primary"
+                                  <motion.div
+                                    className="ml-auto w-2 h-2 rounded-full bg-blue-600 dark:bg-blue-400"
                                   layoutId="mobileActiveIndicator"
                                   initial={{ opacity: 0, scale: 0 }}
                                   animate={{ opacity: 1, scale: 1 }}
@@ -184,9 +188,9 @@ export function MobileNavigation() {
                 </nav>
 
                 {/* Menu Footer */}
-                <div className="p-6 border-t border-border bg-muted/20">
+                <div className="p-6 border-t border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800">
                   <div className="text-center">
-                    <p className="text-sm text-muted-foreground">
+                    <p className="text-sm text-gray-600 dark:text-gray-400">
                       Navigate through the portfolio
                     </p>
                   </div>
