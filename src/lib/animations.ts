@@ -1,3 +1,5 @@
+import { easeInOut } from 'framer-motion'
+
 export const fadeInUp = {
   hidden: { opacity: 0, y: 30 },
   visible: {
@@ -75,7 +77,7 @@ export const backgroundFloat = {
   transition: {
     duration: 12,
     repeat: Infinity,
-    ease: [0.4, 0, 0.6, 1]
+    ease: easeInOut
   }
 }
 
@@ -89,6 +91,6 @@ export const backgroundFloatReverse = {
   transition: {
     duration: 15,
     repeat: Infinity,
-    ease: [0.4, 0, 0.6, 1]
+    ease: easeInOut
   }
 }

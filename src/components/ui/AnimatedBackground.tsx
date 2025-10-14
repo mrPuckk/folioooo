@@ -1,6 +1,6 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { motion, easeInOut } from 'framer-motion'
 import { backgroundFloat, backgroundFloatReverse } from '@/lib/animations'
 
 interface AnimatedBackgroundProps {
@@ -45,7 +45,7 @@ export function AnimatedBackground({ className = '', variant = 'default' }: Anim
         transition={{
           duration: 8,
           repeat: Infinity,
-          ease: [0.4, 0, 0.6, 1],
+          ease: easeInOut,
           delay: 3
         }}
       />
