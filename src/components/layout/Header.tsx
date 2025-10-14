@@ -17,7 +17,7 @@ interface HeaderProps {
 
 export function Header({ theme, toggleTheme, mounted }: HeaderProps) {
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background md:bg-background/95 backdrop-blur md:supports-[backdrop-filter]:bg-background/60">
+    <header className="sticky top-0 z-[50] w-full border-b border-border/40 bg-background md:bg-background/95 backdrop-blur md:supports-[backdrop-filter]:bg-background/60">
       <Container>
         <div className="flex items-center justify-between py-4">
           {/* Site Title */}
