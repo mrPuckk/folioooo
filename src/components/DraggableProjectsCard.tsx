@@ -195,14 +195,18 @@ export function DraggableProjectsCard({
           {/* Mobile: Circular minimized state */}
           <div className={`sm:hidden ${isMinimized ? 'flex items-center justify-center w-12 h-12' : 'flex items-center justify-between'}`}>
             {isMinimized ? (
-              <Button 
-                variant="ghost" 
-                size="sm" 
-                className="h-12 w-12 p-0 rounded-full touch-manipulation"
-                onClick={toggleMinimize}
-              >
-                <Plus className="h-4 w-4 text-primary animate-pulse drop-shadow-lg" />
-              </Button>
+              <div className="relative">
+                <div className="absolute inset-0 rounded-full bg-primary/20 animate-ping"></div>
+                <div className="absolute inset-0 rounded-full bg-gradient-to-r from-primary/30 via-primary/20 to-primary/30 animate-pulse"></div>
+                <Button 
+                  variant="ghost" 
+                  size="sm" 
+                  className="relative h-12 w-12 p-0 rounded-full touch-manipulation z-10"
+                  onClick={toggleMinimize}
+                >
+                  <Plus className="h-4 w-4 text-primary drop-shadow-lg" />
+                </Button>
+              </div>
             ) : (
               <div className="flex items-center justify-between w-full">
                 <div className="flex items-center gap-2">
@@ -210,14 +214,18 @@ export function DraggableProjectsCard({
                   <CardTitle className="text-sm font-medium">Projects</CardTitle>
                 </div>
                 <div className="flex items-center gap-1">
-                  <Button 
-                    variant="ghost" 
-                    size="sm" 
-                    className="h-7 w-7 p-0 touch-manipulation"
-                    onClick={toggleMinimize}
-                  >
-                    <Minus className="h-3 w-3 text-primary animate-pulse drop-shadow-lg" />
-                  </Button>
+                  <div className="relative">
+                    <div className="absolute inset-0 rounded-full bg-primary/20 animate-ping"></div>
+                    <div className="absolute inset-0 rounded-full bg-gradient-to-r from-primary/30 via-primary/20 to-primary/30 animate-pulse"></div>
+                    <Button 
+                      variant="ghost" 
+                      size="sm" 
+                      className="relative h-7 w-7 p-0 touch-manipulation z-10"
+                      onClick={toggleMinimize}
+                    >
+                      <Minus className="h-3 w-3 text-primary drop-shadow-lg" />
+                    </Button>
+                  </div>
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
                       <Button variant="ghost" size="sm" className="h-7 w-7 p-0 touch-manipulation">
@@ -243,18 +251,22 @@ export function DraggableProjectsCard({
               <CardTitle className="text-sm font-medium">Projects</CardTitle>
             </div>
             <div className="flex items-center gap-1">
-              <Button 
-                variant="ghost" 
-                size="sm" 
-                className="h-6 w-6 p-0"
-                onClick={toggleMinimize}
-              >
-                {isMinimized ? (
-                  <Plus className="h-3 w-3 text-primary animate-pulse drop-shadow-lg" />
-                ) : (
-                  <Minus className="h-3 w-3 text-primary animate-pulse drop-shadow-lg" />
-                )}
-              </Button>
+              <div className="relative">
+                <div className="absolute inset-0 rounded-full bg-primary/20 animate-ping"></div>
+                <div className="absolute inset-0 rounded-full bg-gradient-to-r from-primary/30 via-primary/20 to-primary/30 animate-pulse"></div>
+                <Button 
+                  variant="ghost" 
+                  size="sm" 
+                  className="relative h-6 w-6 p-0 z-10"
+                  onClick={toggleMinimize}
+                >
+                  {isMinimized ? (
+                    <Plus className="h-3 w-3 text-primary drop-shadow-lg" />
+                  ) : (
+                    <Minus className="h-3 w-3 text-primary drop-shadow-lg" />
+                  )}
+                </Button>
+              </div>
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Button variant="ghost" size="sm" className="h-6 w-6 p-0">
