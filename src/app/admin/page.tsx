@@ -8,6 +8,8 @@ import { Card } from '@/components/ui/Card'
 import { RefreshCw, Mail, Calendar, Users, LogOut } from 'lucide-react'
 import { ProtectedRoute } from '@/components/ProtectedRoute'
 import { useAuth } from '@/context/AuthContext'
+import { ErrorBoundary } from '@/components/ErrorBoundary'
+import { ClientOnly } from '@/components/ClientOnly'
 
 interface EmailData {
   email: string
@@ -18,7 +20,8 @@ interface ApiResponse {
   emails: string[]
   count: number
   lastUpdated: string
-  details: EmailData[]
+  details?: EmailData[]
+  note?: string
 }
 
 function AdminPageContent() {
@@ -132,9 +135,15 @@ function AdminPageContent() {
                 <Card className="p-6">
                   <h2 className="text-xl font-semibold mb-4">Email Requests</h2>
                   
-                  {emails.details.length === 0 ? (
+                  {emails.note && (
+                    <div className="mb-4 p-3 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg">
+                      <p className="text-blue-600 dark:text-blue-400 text-sm">{emails.note}</p>
+                    </div>
+                  )}
+                  
+                  {!emails.details || emails.details.length === 0 ? (
                     <p className="text-muted-foreground text-center py-8">
-                      No email requests yet.
+                      {emails.note ? 'No detailed email data available.' : 'No email requests yet.'}
                     </p>
                   ) : (
                     <div className="space-y-3">
@@ -167,8 +176,19 @@ function AdminPageContent() {
 
 export default function AdminPage() {
   return (
-    <ProtectedRoute>
-      <AdminPageContent />
-    </ProtectedRoute>
+    <ClientOnly fallback={
+      <div className="min-h-screen bg-background text-foreground flex items-center justify-center">
+        <div className="text-center">
+          <div className="w-8 h-8 border-2 border-primary border-t-transparent rounded-full animate-spin mx-auto mb-4" />
+          <p className="text-muted-foreground">Loading...</p>
+        </div>
+      </div>
+    }>
+      <ErrorBoundary>
+        <ProtectedRoute>
+          <AdminPageContent />
+        </ProtectedRoute>
+      </ErrorBoundary>
+    </ClientOnly>
   )
 }
