@@ -67,7 +67,7 @@ export function MobileNavigation() {
       <div className="md:hidden">
         <button
           onClick={toggleMenu}
-          className="p-2 rounded-lg bg-background/80 backdrop-blur-sm border border-border/20 hover:bg-background/90 transition-colors"
+          className="p-2 rounded-lg bg-background border border-border shadow-lg hover:bg-muted/50 transition-colors"
           aria-label="Toggle navigation menu"
         >
           <motion.div
@@ -93,7 +93,7 @@ export function MobileNavigation() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.2 }}
-              className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 md:hidden"
+              className="fixed inset-0 bg-black/60 backdrop-blur-md z-40 md:hidden"
               onClick={toggleMenu}
             />
             
@@ -103,11 +103,11 @@ export function MobileNavigation() {
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: '100%' }}
               transition={{ duration: 0.3, ease: 'easeOut' }}
-              className="fixed top-0 right-0 h-full w-80 max-w-[85vw] bg-background/95 backdrop-blur-md border-l border-border/20 z-50 md:hidden"
+              className="fixed top-0 right-0 h-full w-80 max-w-[85vw] bg-background border-l border-border shadow-2xl z-50 md:hidden"
             >
               <div className="flex flex-col h-full">
                 {/* Menu Header */}
-                <div className="flex items-center justify-between p-6 border-b border-border/20">
+                <div className="flex items-center justify-between p-6 border-b border-border bg-muted/30">
                   <h2 className="text-lg font-semibold text-foreground">Navigation</h2>
                   <button
                     onClick={toggleMenu}
@@ -138,8 +138,8 @@ export function MobileNavigation() {
                               <div
                                 className={`flex items-center space-x-3 px-4 py-3 rounded-lg transition-colors ${
                                   isActive
-                                    ? 'bg-primary/10 text-primary border border-primary/20'
-                                    : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
+                                    ? 'bg-primary/15 text-primary border border-primary/30 shadow-sm'
+                                    : 'text-foreground hover:text-primary hover:bg-muted/60'
                                 }`}
                               >
                                 <Icon className="h-5 w-5" />
@@ -160,8 +160,8 @@ export function MobileNavigation() {
                               onClick={() => scrollToSection(item.href)}
                               className={`w-full flex items-center space-x-3 px-4 py-3 rounded-lg transition-colors text-left ${
                                 isActive
-                                  ? 'bg-primary/10 text-primary border border-primary/20'
-                                  : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
+                                  ? 'bg-primary/15 text-primary border border-primary/30 shadow-sm'
+                                  : 'text-foreground hover:text-primary hover:bg-muted/60'
                               }`}
                             >
                               <Icon className="h-5 w-5" />
@@ -184,7 +184,7 @@ export function MobileNavigation() {
                 </nav>
 
                 {/* Menu Footer */}
-                <div className="p-6 border-t border-border/20">
+                <div className="p-6 border-t border-border bg-muted/20">
                   <div className="text-center">
                     <p className="text-sm text-muted-foreground">
                       Navigate through the portfolio
