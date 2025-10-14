@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import { Layout } from '@/components/Layout'
 import { AuthProvider } from '@/context/AuthContext'
+import { Analytics } from '@vercel/analytics/next'
 import '@/styles/globals.css'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -82,6 +83,7 @@ export default function RootLayout({
             {children}
           </Layout>
         </AuthProvider>
+        <Analytics />
       </body>
     </html>
   )
