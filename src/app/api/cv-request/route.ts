@@ -1,52 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { promises as fs } from 'fs'
-import path from 'path'
-
-// Fallback storage file path
-const FALLBACK_STORAGE_FILE = path.join(process.cwd(), 'data', 'cv-requests.json')
-
-// Fallback storage interface
-interface FallbackStorage {
-  emails: string[]
-  lastUpdated: string
-}
-
-// Helper functions for fallback storage
-async function readFallbackStorage(): Promise<string[]> {
-  try {
-    const data = await fs.readFile(FALLBACK_STORAGE_FILE, 'utf8')
-    const storage: FallbackStorage = JSON.parse(data)
-    return storage.emails || []
-  } catch (error) {
-    // File doesn't exist or is corrupted, return empty array
-    return []
-  }
-}
-
-async function writeFallbackStorage(emails: string[]): Promise<void> {
-  try {
-    // Ensure data directory exists
-    const dataDir = path.dirname(FALLBACK_STORAGE_FILE)
-    await fs.mkdir(dataDir, { recursive: true })
-    
-    const storage: FallbackStorage = {
-      emails,
-      lastUpdated: new Date().toISOString()
-    }
-    
-    await fs.writeFile(FALLBACK_STORAGE_FILE, JSON.stringify(storage, null, 2))
-  } catch (error) {
-    console.error('Failed to write fallback storage:', error)
-    throw error
-  }
-}
 
 async function getCvRequestsCollection() {
   try {
     const { getCvRequestsCollection: getCollection } = await import('@/lib/mongodb')
     return await getCollection()
   } catch (error) {
-    console.warn('MongoDB not available, using fallback storage:', error)
+    console.warn('MongoDB not available:', error)
     return null
   }
 }
@@ -106,26 +65,16 @@ export async function POST(request: NextRequest) {
         { status: 200 }
       )
     } else {
-      // Use fallback storage
-      const fallbackEmails = await readFallbackStorage()
+      // MongoDB not available - just log the request and return success
+      console.log(`New CV request from: ${email} (logged only)`)
+      console.log(`Timestamp: ${new Date().toISOString()}`)
       
-      if (fallbackEmails.includes(email.toLowerCase())) {
-        return NextResponse.json(
-          { error: 'Email already exists' },
-          { status: 409 }
-        )
-      }
-
-      fallbackEmails.push(email.toLowerCase())
-      await writeFallbackStorage(fallbackEmails)
-      
-      console.log(`New CV request from: ${email} (fallback storage)`)
-      console.log(`Total emails in fallback storage: ${fallbackEmails.length}`)
-
+      // In production without MongoDB, we'll just log the request
+      // The user will still get a success response
       return NextResponse.json(
         { 
           message: 'Email submitted successfully',
-          count: fallbackEmails.length 
+          note: 'Your request has been logged'
         },
         { status: 200 }
       )
@@ -162,17 +111,12 @@ export async function GET() {
         }))
       }, { status: 200 })
     } else {
-      // Use fallback storage
-      const fallbackEmails = await readFallbackStorage()
-      
+      // MongoDB not available - return empty response
       return NextResponse.json({
-        emails: fallbackEmails,
-        count: fallbackEmails.length,
+        emails: [],
+        count: 0,
         lastUpdated: new Date().toISOString(),
-        details: fallbackEmails.map(email => ({
-          email,
-          created_at: new Date().toISOString()
-        }))
+        note: 'Database not available - requests are logged only'
       }, { status: 200 })
     }
   } catch (error) {
