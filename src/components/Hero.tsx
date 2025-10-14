@@ -39,6 +39,8 @@ export function Hero() {
         body: JSON.stringify({ email }),
       })
 
+      const data = await response.json()
+
       if (response.ok) {
         setIsSubmitted(true)
         setEmail('')
@@ -48,11 +50,14 @@ export function Hero() {
           setIsSubmitted(false)
         }, 2000)
       } else {
-        throw new Error('Failed to submit email')
+        // Handle specific error messages from the API
+        const errorMessage = data.error || 'Failed to submit email'
+        throw new Error(errorMessage)
       }
     } catch (error) {
       console.error('Error submitting email:', error)
-      alert('Failed to submit email. Please try again.')
+      const errorMessage = error instanceof Error ? error.message : 'Network error. Please check your connection and try again.'
+      alert(`Failed to submit email: ${errorMessage}`)
     } finally {
       setIsSubmitting(false)
     }
