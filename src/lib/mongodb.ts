@@ -8,20 +8,31 @@ export async function connectToDatabase(): Promise<{ client: MongoClient; db: Db
     return { client: cachedClient, db: cachedDb }
   }
 
-  const uri = process.env.MONGODB_URI
+  const uri = process.env.MONGODB_URL || process.env.MONGODB_URI
+  
   if (!uri) {
-    throw new Error('Please define the MONGODB_URI environment variable inside .env.local')
+    // In development, provide a helpful error message
+    if (process.env.NODE_ENV === 'development') {
+      throw new Error('Please define the MONGODB_URL environment variable inside .env.local')
+    }
+    // In production, throw a generic error
+    throw new Error('Database connection not configured')
   }
 
-  const client = new MongoClient(uri)
-  await client.connect()
+  try {
+    const client = new MongoClient(uri)
+    await client.connect()
 
-  const db = client.db(process.env.MONGODB_DB || 'portfolio')
+    const db = client.db(process.env.MONGODB_DB || 'portfolio')
 
-  cachedClient = client
-  cachedDb = db
+    cachedClient = client
+    cachedDb = db
 
-  return { client, db }
+    return { client, db }
+  } catch (error) {
+    console.error('Failed to connect to MongoDB:', error)
+    throw new Error('Database connection failed')
+  }
 }
 
 export async function getCvRequestsCollection() {
