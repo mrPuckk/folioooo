@@ -11,15 +11,11 @@ import { AnimatedBackground } from '@/components/ui/AnimatedBackground'
 import { SectionHeader } from '@/components/ui/SectionHeader'
 import { SITE_CONFIG, SOCIAL_LINKS } from '@/lib/constants'
 import { staggerContainer, staggerItem, buttonHover } from '@/lib/animations'
+import { DEFAULT_PROJECT_STATUSES, PROJECT_STATUS_CONFIG } from '@/config/projectStatusConfig'
 
 export default function Home() {
-  // Sample projects array - replace with your actual project data
-  const projects = [
-    { id: 'p1', name: 'EEG Seizure Detector – SoC Accelerator', status: 'in_progress' as const },
-    { id: 'p2', name: 'ECG MINA Accelerator Reproduction', status: 'complete' as const },
-    { id: 'p3', name: 'IoT Gas Detection System (Realtime Dashboard)', status: 'in_progress' as const },
-    { id: 'p4', name: 'RF LNA 1–3 GHz Notes & Validation', status: 'pending' as const },
-  ]
+  // Use configured project statuses
+  const projects = DEFAULT_PROJECT_STATUSES
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -32,8 +28,8 @@ export default function Home() {
       {/* Draggable Projects Card */}
       <DraggableProjectsCard 
         projects={projects}
-        storageKey="homepageProjectsCard_v1"
-        maxVisible={8}
+        storageKey={PROJECT_STATUS_CONFIG.storageKey}
+        maxVisible={PROJECT_STATUS_CONFIG.maxVisible}
       />
 
       {/* Hero Section */}

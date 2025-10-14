@@ -20,22 +20,18 @@ import {
   MoreVertical,
   GripVertical,
   RotateCcw,
+  ChevronDown,
+  ChevronUp,
 } from 'lucide-react'
-
-type ProjectStatus = 'complete' | 'in_progress' | 'pending'
-
-type Project = {
-  id: string
-  name: string
-  status: ProjectStatus
-  updatedAt?: string
-}
-
-interface DraggableProjectsCardProps {
-  projects: Project[]
-  storageKey?: string
-  maxVisible?: number
-}
+import { 
+  ProjectStatusItem, 
+  DraggableProjectsCardProps 
+} from '@/types/projectStatus'
+import { 
+  calculateProjectStats, 
+  formatProjectStatus, 
+  getStatusBadgeClasses 
+} from '@/lib/projectStatusUtils'
 
 export function DraggableProjectsCard({
   projects,
@@ -46,6 +42,7 @@ export function DraggableProjectsCard({
   const [isDragging, setIsDragging] = useState(false)
   const [windowSize, setWindowSize] = useState({ width: 0, height: 0 })
   const [mounted, setMounted] = useState(false)
+  const [isMinimized, setIsMinimized] = useState(false)
   const cardRef = useRef<HTMLDivElement>(null)
   const dragControls = useDragControls()
 
@@ -88,6 +85,8 @@ export function DraggableProjectsCard({
     window.addEventListener('resize', handleResize)
     return () => window.removeEventListener('resize', handleResize)
   }, [])
+
+  // No auto-minimize - card stays in user's chosen state
 
   // Clamp position to viewport bounds
   const clampToViewport = (x: number, y: number) => {
@@ -134,8 +133,13 @@ export function DraggableProjectsCard({
     savePosition(clamped.x, clamped.y)
   }
 
-  // Get status icon
-  const getStatusIcon = (status: ProjectStatus) => {
+  // Toggle minimize state
+  const toggleMinimize = () => {
+    setIsMinimized(!isMinimized)
+  }
+
+  // Get status icon component
+  const getStatusIcon = (status: string) => {
     switch (status) {
       case 'complete':
         return <CheckCircle2 className="h-3 w-3 text-green-600" />
@@ -143,26 +147,13 @@ export function DraggableProjectsCard({
         return <Clock className="h-3 w-3 text-amber-600" />
       case 'pending':
         return <PauseCircle className="h-3 w-3 text-slate-500" />
+      default:
+        return <PauseCircle className="h-3 w-3 text-slate-500" />
     }
   }
 
-  // Calculate status counts and completion
-  const getStatusCounts = () => {
-    const counts = projects.reduce((acc, project) => {
-      acc[project.status]++
-      return acc
-    }, { complete: 0, in_progress: 0, pending: 0 })
-    
-    return {
-      total: projects.length,
-      complete: counts.complete,
-      inProgress: counts.in_progress,
-      pending: counts.pending
-    }
-  }
-
-  const counts = getStatusCounts()
-  const completionPercentage = counts.total > 0 ? Math.round((counts.complete / counts.total) * 100) : 0
+  // Calculate project statistics
+  const { counts, completionPercentage } = calculateProjectStats(projects)
 
   // Don't render until mounted to prevent hydration mismatch
   if (!mounted) {
@@ -200,82 +191,91 @@ export function DraggableProjectsCard({
               <GripVertical className="h-4 w-4 text-muted-foreground cursor-grab" />
               <CardTitle className="text-sm font-medium">Projects</CardTitle>
             </div>
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="sm" className="h-6 w-6 p-0">
-                  <MoreVertical className="h-3 w-3" />
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end">
-                <DropdownMenuItem onClick={resetPosition} className="text-xs">
-                  <RotateCcw className="h-3 w-3 mr-2" />
-                  Reset position
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
+            <div className="flex items-center gap-1">
+              <Button 
+                variant="ghost" 
+                size="sm" 
+                className="h-6 w-6 p-0"
+                onClick={toggleMinimize}
+                title={isMinimized ? "Expand" : "Minimize"}
+              >
+                {isMinimized ? <ChevronUp className="h-3 w-3" /> : <ChevronDown className="h-3 w-3" />}
+              </Button>
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="ghost" size="sm" className="h-6 w-6 p-0">
+                    <MoreVertical className="h-3 w-3" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end">
+                  <DropdownMenuItem onClick={resetPosition} className="text-xs">
+                    <RotateCcw className="h-3 w-3 mr-2" />
+                    Reset position
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </div>
           </div>
         </CardHeader>
 
-        <CardContent className="pt-0">
-          {/* Progress Summary */}
-          <div className="mb-4">
-            <div className="flex items-center justify-between mb-2">
-              <span className="text-xs text-muted-foreground">Progress</span>
-              <span className="text-xs font-medium">{completionPercentage}%</span>
+        {!isMinimized && (
+          <CardContent className="pt-0">
+            {/* Progress Summary */}
+            <div className="mb-4">
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-xs text-muted-foreground">Progress</span>
+                <span className="text-xs font-medium">{completionPercentage}%</span>
+              </div>
+              <Progress value={completionPercentage} className="h-2" />
+              <div className="flex justify-between mt-2">
+                <div className="flex items-center gap-1">
+                  <CheckCircle2 className="h-3 w-3 text-green-600" />
+                  <span className="text-xs text-muted-foreground">{counts.complete}</span>
+                </div>
+                <div className="flex items-center gap-1">
+                  <Clock className="h-3 w-3 text-amber-600" />
+                  <span className="text-xs text-muted-foreground">{counts.inProgress}</span>
+                </div>
+                <div className="flex items-center gap-1">
+                  <PauseCircle className="h-3 w-3 text-slate-500" />
+                  <span className="text-xs text-muted-foreground">{counts.pending}</span>
+                </div>
+              </div>
             </div>
-            <Progress value={completionPercentage} className="h-2" />
-            <div className="flex justify-between mt-2">
-              <div className="flex items-center gap-1">
-                <CheckCircle2 className="h-3 w-3 text-green-600" />
-                <span className="text-xs text-muted-foreground">{counts.complete}</span>
-              </div>
-              <div className="flex items-center gap-1">
-                <Clock className="h-3 w-3 text-amber-600" />
-                <span className="text-xs text-muted-foreground">{counts.inProgress}</span>
-              </div>
-              <div className="flex items-center gap-1">
-                <PauseCircle className="h-3 w-3 text-slate-500" />
-                <span className="text-xs text-muted-foreground">{counts.pending}</span>
-              </div>
-            </div>
-          </div>
 
-          {/* Projects List */}
-          <ScrollArea className="h-48">
-            <div className="space-y-2">
-              {projects.slice(0, maxVisible).map((project) => (
-                <div key={project.id} className="flex items-center gap-2 p-2 rounded-md bg-muted/30 hover:bg-muted/50 transition-colors">
-                  {getStatusIcon(project.status)}
-                  <div className="flex-1 min-w-0">
-                    <p className="text-xs font-medium truncate">{project.name}</p>
-                    {project.updatedAt && (
-                      <p className="text-xs text-muted-foreground">
-                        {new Date(project.updatedAt).toLocaleDateString()}
-                      </p>
-                    )}
+            {/* Projects List */}
+            <ScrollArea className="h-48">
+              <div className="space-y-2">
+                {projects.slice(0, maxVisible).map((project) => (
+                  <div key={project.id} className="flex items-center gap-2 p-2 rounded-md bg-muted/30 hover:bg-muted/50 transition-colors">
+                    {getStatusIcon(project.status)}
+                    <div className="flex-1 min-w-0">
+                      <p className="text-xs font-medium truncate">{project.name}</p>
+                      {project.updatedAt && (
+                        <p className="text-xs text-muted-foreground">
+                          {new Date(project.updatedAt).toLocaleDateString()}
+                        </p>
+                      )}
+                    </div>
+                    <Badge 
+                      variant="outline" 
+                      className={getStatusBadgeClasses(project.status)}
+                    >
+                      {formatProjectStatus(project.status)}
+                    </Badge>
                   </div>
-                  <Badge 
-                    variant="outline" 
-                    className={`text-xs px-1.5 py-0.5 ${
-                      project.status === 'complete' ? 'border-green-600 text-green-600' :
-                      project.status === 'in_progress' ? 'border-amber-600 text-amber-600' :
-                      'border-slate-500 text-slate-500'
-                    }`}
-                  >
-                    {project.status.replace('_', ' ')}
-                  </Badge>
-                </div>
-              ))}
-              {projects.length > maxVisible && (
-                <div className="text-center py-2">
-                  <span className="text-xs text-muted-foreground">
-                    +{projects.length - maxVisible} more projects
-                  </span>
-                </div>
-              )}
-            </div>
-          </ScrollArea>
-        </CardContent>
+                ))}
+                {projects.length > maxVisible && (
+                  <div className="text-center py-2">
+                    <span className="text-xs text-muted-foreground">
+                      +{projects.length - maxVisible} more projects
+                    </span>
+                  </div>
+                )}
+              </div>
+            </ScrollArea>
+          </CardContent>
+        )}
       </Card>
     </motion.div>
   )
