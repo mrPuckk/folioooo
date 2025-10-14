@@ -1,49 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { writeFile, readFile, mkdir } from 'fs/promises'
-import { existsSync } from 'fs'
-import path from 'path'
 
-// Path to store the emails file
-const EMAILS_FILE_PATH = path.join(process.cwd(), 'data', 'cv-requests.json')
+// In-memory storage for Vercel (serverless functions)
+// Note: This will reset on each deployment, but works for demo purposes
+let emailStorage: string[] = []
 
-// Ensure data directory exists
-async function ensureDataDirectory() {
-  const dataDir = path.dirname(EMAILS_FILE_PATH)
-  if (!existsSync(dataDir)) {
-    await mkdir(dataDir, { recursive: true })
-  }
-}
-
-// Read existing emails
-async function readEmails() {
-  try {
-    await ensureDataDirectory()
-    if (existsSync(EMAILS_FILE_PATH)) {
-      const data = await readFile(EMAILS_FILE_PATH, 'utf-8')
-      return JSON.parse(data)
-    }
-    return { emails: [], count: 0 }
-  } catch (error) {
-    console.error('Error reading emails:', error)
-    return { emails: [], count: 0 }
-  }
-}
-
-// Write emails to file
-async function writeEmails(emails: string[]) {
-  try {
-    await ensureDataDirectory()
-    const data = {
-      emails,
-      count: emails.length,
-      lastUpdated: new Date().toISOString()
-    }
-    await writeFile(EMAILS_FILE_PATH, JSON.stringify(data, null, 2))
-  } catch (error) {
-    console.error('Error writing emails:', error)
-    throw error
-  }
-}
+// For production, you should use a proper database like:
+// - Vercel Postgres
+// - Supabase
+// - PlanetScale
+// - MongoDB Atlas
+// - Firebase Firestore
 
 export async function POST(request: NextRequest) {
   try {
@@ -66,28 +32,25 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // Read existing emails
-    const { emails: existingEmails } = await readEmails()
-    
     // Check if email already exists
-    if (existingEmails.includes(email.toLowerCase())) {
+    if (emailStorage.includes(email.toLowerCase())) {
       return NextResponse.json(
         { error: 'Email already exists' },
         { status: 409 }
       )
     }
 
-    // Add new email
-    const updatedEmails = [...existingEmails, email.toLowerCase()]
-    await writeEmails(updatedEmails)
+    // Add new email to in-memory storage
+    emailStorage.push(email.toLowerCase())
 
-    // Log the request (optional)
+    // Log the request
     console.log(`New CV request from: ${email}`)
+    console.log(`Total emails stored: ${emailStorage.length}`)
 
     return NextResponse.json(
       { 
         message: 'Email submitted successfully',
-        count: updatedEmails.length 
+        count: emailStorage.length 
       },
       { status: 200 }
     )
@@ -104,8 +67,11 @@ export async function POST(request: NextRequest) {
 // Optional: GET endpoint to view all emails (for admin purposes)
 export async function GET() {
   try {
-    const data = await readEmails()
-    return NextResponse.json(data, { status: 200 })
+    return NextResponse.json({
+      emails: emailStorage,
+      count: emailStorage.length,
+      lastUpdated: new Date().toISOString()
+    }, { status: 200 })
   } catch (error) {
     console.error('Error reading emails:', error)
     return NextResponse.json(

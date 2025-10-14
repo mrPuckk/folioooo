@@ -24,8 +24,6 @@ export function Hero() {
   const [isDialogOpen, setIsDialogOpen] = useState(false)
 
   const submitEmail = async (data: { email: string }) => {
-    console.log('Submitting email:', data.email)
-    
     const response = await fetch('/api/cv-request', {
       method: 'POST',
       headers: {
@@ -35,16 +33,13 @@ export function Hero() {
     })
 
     const result = await response.json()
-    console.log('API Response:', { status: response.status, result })
 
     if (!response.ok) {
       // Handle specific error messages from the API
       const errorMessage = result.error || 'Failed to submit email'
-      console.log('API Error:', errorMessage)
       throw new Error(errorMessage)
     }
 
-    console.log('Email submitted successfully')
     return result
   }
 
