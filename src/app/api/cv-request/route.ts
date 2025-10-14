@@ -1,7 +1,45 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { promises as fs } from 'fs'
+import path from 'path'
 
-// Fallback in-memory storage for when MongoDB is not available
-let fallbackStorage: string[] = []
+// Fallback storage file path
+const FALLBACK_STORAGE_FILE = path.join(process.cwd(), 'data', 'cv-requests.json')
+
+// Fallback storage interface
+interface FallbackStorage {
+  emails: string[]
+  lastUpdated: string
+}
+
+// Helper functions for fallback storage
+async function readFallbackStorage(): Promise<string[]> {
+  try {
+    const data = await fs.readFile(FALLBACK_STORAGE_FILE, 'utf8')
+    const storage: FallbackStorage = JSON.parse(data)
+    return storage.emails || []
+  } catch (error) {
+    // File doesn't exist or is corrupted, return empty array
+    return []
+  }
+}
+
+async function writeFallbackStorage(emails: string[]): Promise<void> {
+  try {
+    // Ensure data directory exists
+    const dataDir = path.dirname(FALLBACK_STORAGE_FILE)
+    await fs.mkdir(dataDir, { recursive: true })
+    
+    const storage: FallbackStorage = {
+      emails,
+      lastUpdated: new Date().toISOString()
+    }
+    
+    await fs.writeFile(FALLBACK_STORAGE_FILE, JSON.stringify(storage, null, 2))
+  } catch (error) {
+    console.error('Failed to write fallback storage:', error)
+    throw error
+  }
+}
 
 async function getCvRequestsCollection() {
   try {
@@ -69,22 +107,25 @@ export async function POST(request: NextRequest) {
       )
     } else {
       // Use fallback storage
-      if (fallbackStorage.includes(email.toLowerCase())) {
+      const fallbackEmails = await readFallbackStorage()
+      
+      if (fallbackEmails.includes(email.toLowerCase())) {
         return NextResponse.json(
           { error: 'Email already exists' },
           { status: 409 }
         )
       }
 
-      fallbackStorage.push(email.toLowerCase())
+      fallbackEmails.push(email.toLowerCase())
+      await writeFallbackStorage(fallbackEmails)
       
       console.log(`New CV request from: ${email} (fallback storage)`)
-      console.log(`Total emails in fallback storage: ${fallbackStorage.length}`)
+      console.log(`Total emails in fallback storage: ${fallbackEmails.length}`)
 
       return NextResponse.json(
         { 
           message: 'Email submitted successfully',
-          count: fallbackStorage.length 
+          count: fallbackEmails.length 
         },
         { status: 200 }
       )
@@ -122,11 +163,13 @@ export async function GET() {
       }, { status: 200 })
     } else {
       // Use fallback storage
+      const fallbackEmails = await readFallbackStorage()
+      
       return NextResponse.json({
-        emails: fallbackStorage,
-        count: fallbackStorage.length,
+        emails: fallbackEmails,
+        count: fallbackEmails.length,
         lastUpdated: new Date().toISOString(),
-        details: fallbackStorage.map(email => ({
+        details: fallbackEmails.map(email => ({
           email,
           created_at: new Date().toISOString()
         }))

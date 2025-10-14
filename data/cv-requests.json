@@ -7,8 +7,11 @@
     "test3@example.com",
     "newtest@example.com",
     "debug@test.com",
-    "completelynew@test.com"
+    "completelynew@test.com",
+    "test-persistence@example.com",
+    "unique-test-1760427478@example.com",
+    "unique-test-12345@example.com",
+    "tuongphung-a@gmail.com"
   ],
-  "count": 8,
-  "lastUpdated": "2025-10-14T06:24:07.552Z"
+  "lastUpdated": "2025-10-14T07:39:23.337Z"
 }
