@@ -8,6 +8,49 @@
       "image": "/avatar.jpg",
       "github": "https://github.com/tuongphung/iot-sensor-network",
       "demo": "https://demo.iot-sensor.net",
+      "pdfUrl": "/pdfs/smart-iot-sensor-network-notes.pdf",
+      "pdfFiles": [
+        {
+          "id": "lecture-1",
+          "name": "Lecture 1 - Introduction to IoT.pdf",
+          "url": "/pdfs/smart-iot-sensor-network-lecture-1.pdf",
+          "size": "2.4 MB",
+          "uploadedAt": "2024-01-15",
+          "type": "lecture"
+        },
+        {
+          "id": "lecture-2",
+          "name": "Lecture 2 - Sensor Networks.pdf",
+          "url": "/pdfs/smart-iot-sensor-network-lecture-2.pdf",
+          "size": "1.8 MB",
+          "uploadedAt": "2024-01-20",
+          "type": "lecture"
+        },
+        {
+          "id": "lecture-3",
+          "name": "Lecture 3 - Data Processing.pdf",
+          "url": "/pdfs/smart-iot-sensor-network-lecture-3.pdf",
+          "size": "2.1 MB",
+          "uploadedAt": "2024-01-25",
+          "type": "lecture"
+        },
+        {
+          "id": "project-notes",
+          "name": "Project Notes & Research.pdf",
+          "url": "/pdfs/smart-iot-sensor-network-notes.pdf",
+          "size": "3.2 MB",
+          "uploadedAt": "2024-01-25",
+          "type": "notes"
+        },
+        {
+          "id": "documentation",
+          "name": "Technical Documentation.pdf",
+          "url": "/pdfs/smart-iot-sensor-network-docs.pdf",
+          "size": "4.5 MB",
+          "uploadedAt": "2024-01-30",
+          "type": "documentation"
+        }
+      ],
       "tags": ["IoT", "Embedded Systems", "Real-time", "Cloud"],
       "category": "embedded",
       "featured": true,
@@ -21,6 +64,33 @@
       "image": "/avatar.jpg",
       "github": "https://github.com/tuongphung/fpga-image-processor",
       "demo": "https://demo.fpga-processor.net",
+      "pdfUrl": "/pdfs/fpga-image-processor-notes.pdf",
+      "pdfFiles": [
+        {
+          "id": "lecture-1",
+          "name": "Lecture 1 - FPGA Fundamentals.pdf",
+          "url": "/pdfs/fpga-image-processor-lecture-1.pdf",
+          "size": "3.1 MB",
+          "uploadedAt": "2024-02-01",
+          "type": "lecture"
+        },
+        {
+          "id": "lecture-2",
+          "name": "Lecture 2 - Image Processing Algorithms.pdf",
+          "url": "/pdfs/fpga-image-processor-lecture-2.pdf",
+          "size": "2.8 MB",
+          "uploadedAt": "2024-02-05",
+          "type": "lecture"
+        },
+        {
+          "id": "project-notes",
+          "name": "FPGA Design Notes.pdf",
+          "url": "/pdfs/fpga-image-processor-notes.pdf",
+          "size": "5.2 MB",
+          "uploadedAt": "2024-02-10",
+          "type": "notes"
+        }
+      ],
       "tags": ["FPGA", "Computer Vision", "Real-time", "Hardware"],
       "category": "hardware",
       "featured": true,
@@ -34,6 +104,41 @@
       "image": "/avatar.jpg",
       "github": "https://github.com/tuongphung/robot-navigation",
       "demo": "https://demo.robot-nav.net",
+      "pdfUrl": "/pdfs/autonomous-robot-navigation-notes.pdf",
+      "pdfFiles": [
+        {
+          "id": "lecture-1",
+          "name": "Lecture 1 - Introduction to Robotics.pdf",
+          "url": "/pdfs/autonomous-robot-navigation-lecture-1.pdf",
+          "size": "2.9 MB",
+          "uploadedAt": "2024-02-15",
+          "type": "lecture"
+        },
+        {
+          "id": "lecture-2",
+          "name": "Lecture 2 - SLAM Algorithms.pdf",
+          "url": "/pdfs/autonomous-robot-navigation-lecture-2.pdf",
+          "size": "3.3 MB",
+          "uploadedAt": "2024-02-20",
+          "type": "lecture"
+        },
+        {
+          "id": "lecture-3",
+          "name": "Lecture 3 - Path Planning.pdf",
+          "url": "/pdfs/autonomous-robot-navigation-lecture-3.pdf",
+          "size": "2.7 MB",
+          "uploadedAt": "2024-02-25",
+          "type": "lecture"
+        },
+        {
+          "id": "project-notes",
+          "name": "Robot Navigation Research.pdf",
+          "url": "/pdfs/autonomous-robot-navigation-notes.pdf",
+          "size": "4.1 MB",
+          "uploadedAt": "2024-03-01",
+          "type": "notes"
+        }
+      ],
       "tags": ["Robotics", "SLAM", "Autonomous", "AI"],
       "category": "robotics",
       "featured": false,
@@ -47,6 +152,33 @@
       "image": "/avatar.jpg",
       "github": "https://github.com/tuongphung/pcb-design-tool",
       "demo": "https://demo.pcb-tool.net",
+      "pdfUrl": "/pdfs/pcb-design-tool-notes.pdf",
+      "pdfFiles": [
+        {
+          "id": "lecture-1",
+          "name": "Lecture 1 - PCB Design Fundamentals.pdf",
+          "url": "/pdfs/pcb-design-tool-lecture-1.pdf",
+          "size": "2.6 MB",
+          "uploadedAt": "2024-03-05",
+          "type": "lecture"
+        },
+        {
+          "id": "lecture-2",
+          "name": "Lecture 2 - Routing Algorithms.pdf",
+          "url": "/pdfs/pcb-design-tool-lecture-2.pdf",
+          "size": "3.0 MB",
+          "uploadedAt": "2024-03-10",
+          "type": "lecture"
+        },
+        {
+          "id": "project-notes",
+          "name": "PCB Design Automation Notes.pdf",
+          "url": "/pdfs/pcb-design-tool-notes.pdf",
+          "size": "3.8 MB",
+          "uploadedAt": "2024-03-15",
+          "type": "notes"
+        }
+      ],
       "tags": ["PCB Design", "Automation", "EDA", "Manufacturing"],
       "category": "tools",
       "featured": false,
@@ -60,6 +192,41 @@
       "image": "/avatar.jpg",
       "github": "https://github.com/tuongphung/ml-accelerator",
       "demo": "https://demo.ml-accelerator.net",
+      "pdfUrl": "/pdfs/ml-accelerator-chip-notes.pdf",
+      "pdfFiles": [
+        {
+          "id": "lecture-1",
+          "name": "Lecture 1 - Neural Network Basics.pdf",
+          "url": "/pdfs/ml-accelerator-chip-lecture-1.pdf",
+          "size": "2.7 MB",
+          "uploadedAt": "2024-03-20",
+          "type": "lecture"
+        },
+        {
+          "id": "lecture-2",
+          "name": "Lecture 2 - Hardware Acceleration.pdf",
+          "url": "/pdfs/ml-accelerator-chip-lecture-2.pdf",
+          "size": "3.1 MB",
+          "uploadedAt": "2024-03-25",
+          "type": "lecture"
+        },
+        {
+          "id": "lecture-3",
+          "name": "Lecture 3 - ASIC Design.pdf",
+          "url": "/pdfs/ml-accelerator-chip-lecture-3.pdf",
+          "size": "2.9 MB",
+          "uploadedAt": "2024-03-30",
+          "type": "lecture"
+        },
+        {
+          "id": "project-notes",
+          "name": "ML Accelerator Design Notes.pdf",
+          "url": "/pdfs/ml-accelerator-chip-notes.pdf",
+          "size": "4.2 MB",
+          "uploadedAt": "2024-04-01",
+          "type": "notes"
+        }
+      ],
       "tags": ["ML", "ASIC", "Edge Computing", "Neural Networks"],
       "category": "hardware",
       "featured": true,
@@ -73,6 +240,41 @@
       "image": "/avatar.jpg",
       "github": "https://github.com/tuongphung/signal-processing-lib",
       "demo": "https://demo.signal-processing.net",
+      "pdfUrl": "/pdfs/signal-processing-library-notes.pdf",
+      "pdfFiles": [
+        {
+          "id": "lecture-1",
+          "name": "Lecture 1 - Digital Signal Processing.pdf",
+          "url": "/pdfs/signal-processing-library-lecture-1.pdf",
+          "size": "2.5 MB",
+          "uploadedAt": "2024-04-05",
+          "type": "lecture"
+        },
+        {
+          "id": "lecture-2",
+          "name": "Lecture 2 - FFT Algorithms.pdf",
+          "url": "/pdfs/signal-processing-library-lecture-2.pdf",
+          "size": "2.8 MB",
+          "uploadedAt": "2024-04-10",
+          "type": "lecture"
+        },
+        {
+          "id": "lecture-3",
+          "name": "Lecture 3 - GPU Optimization.pdf",
+          "url": "/pdfs/signal-processing-library-lecture-3.pdf",
+          "size": "3.2 MB",
+          "uploadedAt": "2024-04-15",
+          "type": "lecture"
+        },
+        {
+          "id": "project-notes",
+          "name": "DSP Library Development.pdf",
+          "url": "/pdfs/signal-processing-library-notes.pdf",
+          "size": "3.9 MB",
+          "uploadedAt": "2024-04-20",
+          "type": "notes"
+        }
+      ],
       "tags": ["DSP", "Audio", "Optimization", "GPU"],
       "category": "software",
       "featured": false,
@@ -86,6 +288,33 @@
       "image": "/avatar.jpg",
       "github": "https://github.com/tuongphung/math-demo",
       "demo": "https://demo.math-content.net",
+      "pdfUrl": "/pdfs/math-demo-notes.pdf",
+      "pdfFiles": [
+        {
+          "id": "lecture-1",
+          "name": "Lecture 1 - LaTeX Fundamentals.pdf",
+          "url": "/pdfs/math-demo-lecture-1.pdf",
+          "size": "1.8 MB",
+          "uploadedAt": "2024-04-25",
+          "type": "lecture"
+        },
+        {
+          "id": "lecture-2",
+          "name": "Lecture 2 - Mathematical Expressions.pdf",
+          "url": "/pdfs/math-demo-lecture-2.pdf",
+          "size": "2.1 MB",
+          "uploadedAt": "2024-04-30",
+          "type": "lecture"
+        },
+        {
+          "id": "project-notes",
+          "name": "Math Demo Documentation.pdf",
+          "url": "/pdfs/math-demo-notes.pdf",
+          "size": "2.3 MB",
+          "uploadedAt": "2024-05-01",
+          "type": "notes"
+        }
+      ],
       "tags": ["Math", "Demo", "LaTeX", "Technical Writing"],
       "category": "demo",
       "featured": false,

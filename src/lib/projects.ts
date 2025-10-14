@@ -3,6 +3,15 @@ import path from 'path'
 import matter from 'gray-matter'
 import projectsData from '@/data/projects.json'
 
+interface PDFFile {
+  id: string
+  name: string
+  url: string
+  size?: string
+  uploadedAt?: string
+  type?: 'lecture' | 'notes' | 'documentation'
+}
+
 interface ProjectData {
   id: number
   title: string
@@ -11,6 +20,8 @@ interface ProjectData {
   image: string
   github: string
   demo: string
+  pdfUrl?: string
+  pdfFiles?: PDFFile[]
   tags: string[]
   category: string
   featured: boolean
@@ -28,6 +39,8 @@ export interface ProjectContent {
   tags: string[]
   slug: string
   content: string
+  pdfUrl?: string
+  pdfFiles?: PDFFile[]
 }
 
 export interface ProjectWithContent extends ProjectContent {
@@ -59,7 +72,7 @@ export async function getProjectBySlug(slug: string): Promise<ProjectWithContent
     const fileContents = fs.readFileSync(filePath, 'utf8')
     const { data, content } = matter(fileContents)
 
-    const projectData = projectsData.projects.find((p: ProjectData) => p.slug === slug)
+    const projectData = projectsData.projects.find((p: any) => p.slug === slug) as ProjectData | undefined
     
     if (!projectData) {
       return null
@@ -76,6 +89,11 @@ export async function getProjectBySlug(slug: string): Promise<ProjectWithContent
       tags: data.tags || projectData.tags,
       slug: slug,
       content: content,
+      pdfUrl: projectData.pdfUrl,
+      pdfFiles: projectData.pdfFiles?.map((file: any) => ({
+        ...file,
+        type: file.type as 'lecture' | 'notes' | 'documentation' | undefined
+      })),
     }
 
     return {
@@ -98,5 +116,5 @@ export async function getAllProjects(): Promise<ProjectWithContent[]> {
 }
 
 export function getProjectData(slug: string) {
-  return projectsData.projects.find((project: ProjectData) => project.slug === slug) || null
+  return projectsData.projects.find((project: any) => project.slug === slug) as ProjectData | null
 } 

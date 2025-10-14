@@ -1,3 +1,12 @@
+export interface PDFFile {
+  id: string
+  name: string
+  url: string
+  size?: string
+  uploadedAt?: string
+  type?: 'lecture' | 'notes' | 'documentation'
+}
+
 export interface Project {
   id: number
   title: string
@@ -10,15 +19,18 @@ export interface Project {
   category: string
   featured: boolean
   slug: string
+  pdfUrl?: string
+  pdfFiles?: PDFFile[]
 }
 
 export interface ProjectCardProps {
-  project: Project;
-  className?: string;
+  project: Project
+  index: number
+  className?: string
 }
 
 export interface ProjectsGridProps {
-  projects: Project[];
-  filter?: string;
-  className?: string;
+  projects?: Project[]
+  filter?: string
+  className?: string
 } 

@@ -7,6 +7,7 @@ import Link from 'next/link'
 import { Badge } from '@/components/ui/Badge'
 import { Button } from '@/components/ui/Button'
 import { EnhancedMarkdownRenderer } from '@/components/EnhancedMarkdownRenderer'
+import { PDFPreviewer } from '@/components/PDFPreviewer'
 import { ProjectWithContent } from '@/lib/projects'
 
 interface ProjectDetailProps {
@@ -116,6 +117,15 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
                   </a>
                 </Button>
               )}
+
+              {/* Lecture Notes Viewer */}
+              <PDFPreviewer 
+                pdfUrl={project.pdfUrl}
+                pdfFiles={project.pdfFiles}
+                title={project.title}
+                projectSlug={project.slug}
+                className="bg-gradient-to-r from-primary/10 to-secondary/10 border-primary/30 hover:border-primary/50"
+              />
             </div>
           </motion.div>
 

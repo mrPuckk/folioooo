@@ -8,6 +8,7 @@ import { Github, ExternalLink } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { Project } from '@/types/project'
+import { fadeInUp, cardHover, buttonHover, scaleIn } from '@/lib/animations'
 
 interface ProjectCardProps {
   project: Project
@@ -15,36 +16,14 @@ interface ProjectCardProps {
 }
 
 export function ProjectCard({ project, index }: ProjectCardProps) {
-  const cardVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.5,
-        delay: index * 0.05
-      }
-    }
-  }
-
-  const contentVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        duration: 0.3,
-        delay: index * 0.05 + 0.1
-      }
-    }
-  }
 
   return (
     <motion.div
-      variants={cardVariants}
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true }}
-      whileHover={{ y: -5 }}
+      transition={{ duration: 0.5, delay: index * 0.05 }}
+      {...cardHover}
     >
       <Card className="group h-full overflow-hidden bg-background/90 backdrop-blur-sm border-primary/20 hover:border-primary/40 transition-all duration-300 hover:shadow-xl shadow-lg">
         {/* Project Image */}
@@ -111,7 +90,9 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
           {/* Description */}
           <motion.p 
             className="text-muted-foreground text-sm leading-relaxed"
-            variants={contentVariants}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.3, delay: index * 0.05 + 0.1 }}
           >
             {project.description}
           </motion.p>
@@ -119,7 +100,9 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
           {/* Tech Stack */}
           <motion.div 
             className="space-y-3"
-            variants={contentVariants}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.3, delay: index * 0.05 + 0.1 }}
           >
             <h4 className="text-sm font-semibold text-foreground">Technologies:</h4>
             <div className="flex flex-wrap gap-2">
@@ -141,7 +124,9 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
           {/* Tags */}
           <motion.div 
             className="space-y-3"
-            variants={contentVariants}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.3, delay: index * 0.05 + 0.1 }}
           >
             <h4 className="text-sm font-semibold text-foreground">Tags:</h4>
             <div className="flex flex-wrap gap-2">
@@ -163,13 +148,12 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
           {/* Action Buttons */}
           <motion.div 
             className="flex gap-3 pt-4"
-            variants={contentVariants}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.3, delay: index * 0.05 + 0.1 }}
           >
             {project.github && (
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
+              <motion.div {...buttonHover}>
                 <Button variant="outline" size="sm" asChild className="font-medium">
                   <a href={project.github} target="_blank" rel="noopener noreferrer">
                     <Github className="w-4 h-4 mr-2" />
@@ -179,10 +163,7 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
               </motion.div>
             )}
             {project.demo && (
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
+              <motion.div {...buttonHover}>
                 <Button size="sm" asChild className="font-medium">
                   <a href={project.demo} target="_blank" rel="noopener noreferrer">
                     <ExternalLink className="w-4 h-4 mr-2" />

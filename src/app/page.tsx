@@ -5,11 +5,36 @@ import { Button } from '@/components/ui/Button'
 import { Hero } from '@/components/Hero'
 import { About } from '@/components/About'
 import { ProjectsGrid } from '@/components/ProjectsGrid'
+import { PortfolioUpdateNotice } from '@/components/PortfolioUpdateNotice'
+import { DraggableProjectsCard } from '@/components/DraggableProjectsCard'
+import { AnimatedBackground } from '@/components/ui/AnimatedBackground'
+import { SectionHeader } from '@/components/ui/SectionHeader'
 import { SITE_CONFIG, SOCIAL_LINKS } from '@/lib/constants'
+import { staggerContainer, staggerItem, buttonHover } from '@/lib/animations'
 
 export default function Home() {
+  // Sample projects array - replace with your actual project data
+  const projects = [
+    { id: 'p1', name: 'EEG Seizure Detector – SoC Accelerator', status: 'in_progress' as const },
+    { id: 'p2', name: 'ECG MINA Accelerator Reproduction', status: 'complete' as const },
+    { id: 'p3', name: 'IoT Gas Detection System (Realtime Dashboard)', status: 'in_progress' as const },
+    { id: 'p4', name: 'RF LNA 1–3 GHz Notes & Validation', status: 'pending' as const },
+  ]
+
   return (
     <div className="min-h-screen bg-background text-foreground">
+      {/* Portfolio Update Notice - Homepage Only */}
+      <PortfolioUpdateNotice 
+        projects={projects}
+        deadline="2025-10-25"
+      />
+
+      {/* Draggable Projects Card */}
+      <DraggableProjectsCard 
+        projects={projects}
+        storageKey="homepageProjectsCard_v1"
+        maxVisible={8}
+      />
 
       {/* Hero Section */}
       <section id="home">
@@ -28,97 +53,11 @@ export default function Home() {
 
       {/* Enhanced Contact Section */}
       <section id="contact" className="relative py-20 px-4 overflow-hidden">
-        {/* Enhanced Background with Better Contrast */}
         <div className="absolute inset-0 bg-gradient-to-br from-background via-background/95 to-background/90" />
-        
-        {/* Enhanced Animated Background Elements */}
-        <div className="absolute inset-0 overflow-hidden">
-          <motion.div
-            className="absolute top-20 right-20 w-80 h-80 bg-primary/25 rounded-full blur-3xl"
-            animate={{
-              scale: [1, 1.4, 1],
-              opacity: [0.3, 0.6, 0.3],
-              x: [0, -40, 0],
-              y: [0, 30, 0],
-            }}
-            transition={{
-              duration: 12,
-              repeat: Infinity,
-              ease: 'easeInOut'
-            }}
-          />
-          <motion.div
-            className="absolute bottom-20 left-20 w-96 h-96 bg-secondary/30 rounded-full blur-3xl"
-            animate={{
-              scale: [1.4, 1, 1.4],
-              opacity: [0.4, 0.2, 0.4],
-              x: [0, 50, 0],
-              y: [0, -40, 0],
-            }}
-            transition={{
-              duration: 15,
-              repeat: Infinity,
-              ease: 'easeInOut'
-            }}
-          />
-          
-          {/* Additional depth elements */}
-          <motion.div
-            className="absolute top-1/2 left-1/4 w-64 h-64 bg-primary/20 rounded-full blur-2xl"
-            animate={{
-              scale: [1, 1.2, 1],
-              opacity: [0.2, 0.4, 0.2],
-            }}
-            transition={{
-              duration: 8,
-              repeat: Infinity,
-              ease: 'easeInOut',
-              delay: 2
-            }}
-          />
-          <motion.div
-            className="absolute bottom-1/2 right-1/4 w-72 h-72 bg-secondary/25 rounded-full blur-2xl"
-            animate={{
-              scale: [1.2, 1, 1.2],
-              opacity: [0.3, 0.1, 0.3],
-            }}
-            transition={{
-              duration: 10,
-              repeat: Infinity,
-              ease: 'easeInOut',
-              delay: 4
-            }}
-          />
-        </div>
+        <AnimatedBackground />
 
         <div className="container mx-auto text-center relative z-10">
-          {/* Apple-style Header */}
-          <motion.div 
-            className="mb-16"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-          >
-            <div className="text-center">
-              <motion.h2 
-                className="text-6xl lg:text-7xl font-bold bg-gradient-to-r from-primary via-primary/90 to-secondary bg-clip-text text-transparent tracking-tight"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8 }}
-                viewport={{ once: true }}
-              >
-                Get In Touch
-              </motion.h2>
-              <motion.div 
-                className="w-24 h-1 bg-gradient-to-r from-primary to-secondary mx-auto mt-6 rounded-full"
-                initial={{ opacity: 0, scaleX: 0 }}
-                whileInView={{ opacity: 1, scaleX: 1 }}
-                transition={{ duration: 0.8, delay: 0.2 }}
-                viewport={{ once: true }}
-              />
-            </div>
-          </motion.div>
+          <SectionHeader title="Get In Touch" />
           
           <motion.div 
             className="max-w-2xl mx-auto space-y-8"
@@ -144,18 +83,12 @@ export default function Home() {
               transition={{ duration: 0.6, delay: 0.4 }}
               viewport={{ once: true }}
             >
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
+              <motion.div {...buttonHover}>
                 <Button size="lg" className="text-lg px-8 py-4 font-medium shadow-lg hover:shadow-xl transition-all duration-300">
                   Send Message
                 </Button>
               </motion.div>
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
+              <motion.div {...buttonHover}>
                 <Button variant="outline" size="lg" className="text-lg px-8 py-4 font-medium shadow-lg hover:shadow-xl transition-all duration-300">
                   Schedule Call
                 </Button>

@@ -3,6 +3,9 @@
 import { motion } from 'framer-motion'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card'
 import { Badge } from '@/components/ui/Badge'
+import { SectionHeader } from '@/components/ui/SectionHeader'
+import { AnimatedBackground } from '@/components/ui/AnimatedBackground'
+import { staggerContainer, staggerItem, fadeInUp } from '@/lib/animations'
 
 export function About() {
   const skills = [
@@ -17,195 +20,132 @@ export function About() {
   ]
 
   const timeline = [
+    // ——— EDUCATION ———
     {
         type: 'education',
-        title: 'Bachelor of Engineering – Electrical/Mechatronics',
-        institution: 'Ho Chi Minh University of Technology (HCMUT)',
+        title: 'Bachelor of Engineering – Mechatronic',
+        institution: 'Ho Chi Minh University of Technology',
         period: '2015',
-        description:
-        'High Distinction in Advanced Mathematics I–II, Physics I–II, and core engineering.',
-        'Built an autonomous Arduino-based drone: sensor fusion, control algorithms, basic navigation.'
+        bullets: [
+          'High Distinction in Advanced Mathematics I–II, Physics I–II, and core engineering.',
+          'Built an autonomous Arduino-based drone: sensor fusion, control algorithms, basic navigation.'
+        ]
     },
     {
         type: 'education',
-        title: 'Bachelor of Engineering (Honours) – Mechatronics',
-        institution: 'University of Technology',
-        period: '2020 – 2024',
-        description:
-        'Focus: embedded systems, digital design, and real-time systems.',
-        'Hands-on projects with FPGA/HDL, sensors, and modern C++ (concurrency, code quality).',
-        'Delivered an end-to-end IoT gas-detection system with real-time dashboarding.'
+        title: 'Bachelor of Engineering – Mechatronic (Honours)',
+        institution: 'University of Technology Sydney (UTS)',
+        period: '2020–2023',
+        bullets: [
+          'Focus: embedded systems, digital design, and real-time systems.',
+          'Hands-on projects with FPGA/HDL, sensors, and modern C++ (concurrency, code quality).',
+          'Delivered an end-to-end IoT gas-detection system with real-time dashboarding.'
+        ]
     },
 
-    // ——— EXPERIENCE ———
+    // ——— TRAINING ———
     {
-        type: 'experience',
-        title: 'Embedded Systems Engineer',
-        institution: 'Tech Innovations Inc.',
-        period: '2023 – Present',
-        description:
-        'Develop IoT firmware and edge software for industrial devices (sensors, data acquisition).',
-        'Implement real-time tasks, drivers, and communication stacks; optimize latency and reliability.',
-        'Collaborate on bring-up/validation; document specs, test plans, and results.'
-    },
-    {
-        type: 'experience',
-        title: 'Research Assistant',
-        institution: 'University Lab',
-        period: '2022 – 2023',
-        description:
-        'Conducted FPGA-based signal processing research with real-time constraints.',
-        'Prototyped RTL blocks and evaluation pipelines for time-series signals.'
-    },
-
-    // ——— TRAINING / TRAINEESHIPS ———
-    {
-        type: 'experience',
+        type: 'training',
         title: 'Analog IC Design Trainee',
-        institution: 'Mentored by Dr. Huy Binh (Senior Analog Engineer, Apple, UK)',
+        institution: 'Mentor: Dr. Huy Binh (Senior Analog Engineer, Apple, UK)',
         period: 'Apr 2025 – Present',
-        description:
-        'Practiced op-amp topologies (CS/CG/CD, telescopic/folded), biasing, stability/PSRR, mismatch.',
-        'Ran corners/Monte Carlo; analyzed gm/ro trade-offs and layout-aware considerations.'
+        bullets: [
+          'CMOS fundamentals: device physics, biasing, current mirrors',
+          'Op-amp topologies: folded/telescopic cascode, Miller compensation',
+          'Noise analysis: thermal/flicker noise, stability & phase margin',
+          'Layout: matching, parasitic extraction, Monte Carlo simulation'
+        ],
+        tags: ['Analog IC', 'CMOS', 'Op-Amp', 'Noise Analysis', 'Stability', 'Layout', 'Spectre', 'Monte Carlo']
     },
     {
-        type: 'experience',
+        type: 'training',
         title: 'RF Design Trainee',
-        institution: 'Mentored by Doan Hung (Bosch Vietnam)',
-        period: 'Jun 2024 – Dec 2024',
-        description:
-        'Explored 1–3 GHz fundamentals: R/L/C parasitics, transmission lines, PCB effects.',
-        'Practiced matching, S-parameter interpretation, and measurement workflows.'
+        institution: 'Mentor: PM Doan Hung (Bosch Vietnam)',
+        period: 'Jun 2024',
+        bullets: [
+          'RF fundamentals: transmission lines, Smith chart, S-parameters',
+          'Matching networks: L-section, Pi/T-networks, broadband techniques',
+          'PCB design: microstrip/stripline, impedance control, parasitics',
+          'EMC/EMI: shielding, filtering, VNA calibration, measurement analysis'
+        ],
+        tags: ['RF Design', 'S-parameters', 'Matching', 'EMC/EMI', 'PCB Design', 'VNA', 'Smith Chart', 'Transmission Lines']
     },
 
-    // ——— COURSES / CERTIFICATIONS ———
+    // ——— COURSES / PROGRAMS ———
     {
-        type: 'education',
-        title: 'AI & Machine Learning Certification',
-        institution: 'Online Program',
-        period: '2022 – 2023',
-        description:
-        'Computer vision and neural networks; model training, evaluation, and deployment basics.'
-    },
-    {
-        type: 'education',
-        title: 'AIDE – MLOps & Data (6-month program)',
+        type: 'course',
+        title: 'AIDE (MLOps & Data) – 6-Month Program',
         institution: 'AIDE',
-        period: '2024',
-        description:
-        'Data pipelines, versioning, CI/CD for ML, experiment tracking, and model packaging.'
+        period: '6 months',
+        bullets: [
+          'Data Engineering: ETL/ELT pipelines, streaming (Kafka/Spark), data quality',
+          'MLOps: CI/CD for ML, Docker/Kubernetes, model versioning (MLflow)',
+          'Experiment tracking: hyperparameter optimization, A/B testing',
+          'Production: model deployment, monitoring, drift detection, retraining'
+        ],
+        tags: ['MLOps', 'Data Engineering', 'CI/CD', 'MLflow', 'Docker', 'Kubernetes', 'Data Governance', 'Model Monitoring']
     },
     {
-        type: 'education',
-        title: 'AIO – Machine Learning / Deep Learning',
+        type: 'course',
+        title: 'Neural Signal Processing & Time-Frequency Methods',
+        institution: 'Specialized Program',
+        period: '—',
+        bullets: [
+          'EEG/ECG processing: STFT/wavelets, artifact removal',
+          'Spectral feature engineering and time-frequency analysis',
+          'Real-time signal inference and validation protocols'
+        ],
+        tags: ['Signal Processing', 'EEG/ECG', 'Time-Frequency', 'STFT', 'Wavelet']
+    },
+    {
+        type: 'course',
+        title: 'AIO (ML/DL Training) – 1-Year Program',
         institution: 'AIO',
-        period: '2024',
-        description:
-        'Supervised learning, CNNs, training workflows, and practical deployment patterns.'
+        period: '1 year',
+        bullets: [
+          'First principles: gradients/normal equations, Bayes/likelihood, bias-variance',
+          'Classical ML: linear/logistic regression, SVM, trees/ensembles, regularization',
+          'DL fundamentals: networks from scratch, activations, normalization, optimizers',
+          'Advanced: Transformers, GNNs, RL agents, generative models (VAEs, flow-matching)'
+        ],
+        tags: ['ML/DL', 'Transformers', 'CV', 'NLP', 'Optimization', 'First Principles', 'GNNs', 'RL', 'Generative Models']
     },
     {
-        type: 'education',
-        title: 'Neural Signal Processing & Time–Frequency Methods',
-        institution: 'Specialized Short Course',
-        period: '2024',
-        description:
-        'Time-series denoising/feature extraction; STFT/wavelets for physiological signals (ECG/EEG/PPG).'
+        type: 'course',
+        title: 'Advanced Digital Hardware Design (FPGA/SoC & High-Speed PCB)',
+        institution: 'Professional Track',
+        period: '—',
+        bullets: [
+          'FPGA/SoC: Zynq UltraScale+, Versal ACAP, HLS/C++ synthesis',
+          'RTL Design: SystemVerilog/UVM, timing closure, formal verification',
+          'High-Speed Interfaces: DDR4/DDR5, PCIe Gen4/5, Ethernet 100G',
+          'PCB Design: impedance control, signal integrity, mixed-signal integration'
+        ],
+        tags: ['FPGA', 'SoC', 'RTL', 'AXI', 'High-Speed PCB', 'Mixed-Signal', 'SystemVerilog', 'Signal Integrity', 'DDR', 'PCIe']
     }
   ]
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        duration: 0.8,
-        staggerChildren: 0.2
-      }
-    }
-  }
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.6
-      }
-    }
-  }
 
   return (
     <section className="relative py-20 px-4 overflow-hidden">
       {/* Enhanced Background with Better Contrast */}
       <div className="absolute inset-0 bg-gradient-to-br from-background via-background/95 to-background/90" />
 
-      {/* Enhanced Animated Background Elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        <motion.div
-          className="absolute top-10 right-10 w-80 h-80 bg-primary/25 rounded-full blur-3xl"
-          animate={{
-            scale: [1, 1.4, 1],
-            opacity: [0.3, 0.6, 0.3],
-            x: [0, -30, 0],
-            y: [0, 20, 0],
-          }}
-          transition={{
-            duration: 12,
-            repeat: Infinity,
-            ease: 'easeInOut'
-          }}
-        />
-        <motion.div
-          className="absolute bottom-10 left-10 w-96 h-96 bg-secondary/30 rounded-full blur-3xl"
-          animate={{
-            scale: [1.4, 1, 1.4],
-            opacity: [0.4, 0.2, 0.4],
-            x: [0, 40, 0],
-            y: [0, -30, 0],
-          }}
-          transition={{
-            duration: 15,
-            repeat: Infinity,
-            ease: 'easeInOut'
-          }}
-        />
-
-        {/* Additional depth elements */}
-        <motion.div
-          className="absolute top-1/2 left-1/3 w-64 h-64 bg-primary/20 rounded-full blur-2xl"
-          animate={{
-            scale: [1, 1.2, 1],
-            opacity: [0.2, 0.4, 0.2],
-          }}
-          transition={{
-            duration: 8,
-            repeat: Infinity,
-            ease: 'easeInOut',
-            delay: 3
-          }}
-        />
-      </div>
+      <AnimatedBackground />
 
       <div className="container mx-auto relative z-10">
         <motion.div
-          variants={containerVariants}
+          variants={staggerContainer}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
         >
-          {/* Header */}
-          <motion.h2
-            className="text-5xl lg:text-6xl font-bold text-center mb-16 bg-gradient-to-r from-primary via-primary/80 to-secondary bg-clip-text text-transparent"
-            variants={itemVariants}
-          >
-            About Me
-          </motion.h2>
+          <SectionHeader title="About Me" />
 
           {/* Summary Paragraph with Enhanced Backdrop */}
           <motion.div
             className="max-w-4xl mx-auto mb-16"
-            variants={itemVariants}
+            variants={staggerItem}
           >
             <div className="relative">
               <div className="absolute inset-0 bg-background/70 backdrop-blur-md rounded-2xl -m-6 p-6 border border-border/20 shadow-xl" />
@@ -224,7 +164,7 @@ export function About() {
           {/* Skills & Technologies with Enhanced Styling */}
           <motion.div
             className="mb-16"
-            variants={itemVariants}
+            variants={staggerItem}
           >
             <h3 className="text-2xl font-bold text-center mb-8 bg-gradient-to-r from-secondary to-primary bg-clip-text text-transparent">
               Skills & Technologies
@@ -260,9 +200,9 @@ export function About() {
           </motion.div>
 
           {/* Timeline with Enhanced Styling */}
-          <motion.div variants={itemVariants}>
+          <motion.div variants={staggerItem}>
             <h3 className="text-2xl font-bold text-center mb-8 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-              Education & Experience
+              Education, Training & Courses
             </h3>
             <div className="max-w-4xl mx-auto">
               <div className="relative">
@@ -292,10 +232,12 @@ export function About() {
                         <CardHeader>
                           <div className="flex items-center justify-between mb-2">
                             <Badge
-                              variant={item.type === 'education' ? 'default' : 'secondary'}
+                              variant={item.type === 'education' ? 'default' : item.type === 'training' ? 'secondary' : 'outline'}
                               className="text-xs font-medium"
                             >
-                              {item.type === 'education' ? '🎓 Education' : '💼 Experience'}
+                              {item.type === 'education' ? '🎓 Education' : 
+                               item.type === 'training' ? '🔧 Training' : 
+                               item.type === 'course' ? '📚 Course' : '💼 Experience'}
                             </Badge>
                             <span className="text-xs text-muted-foreground font-medium">
                               {item.period}
@@ -309,9 +251,33 @@ export function About() {
                           </p>
                         </CardHeader>
                         <CardContent>
-                          <p className="text-sm text-muted-foreground leading-relaxed">
-                            {item.description}
-                          </p>
+                          {item.bullets ? (
+                            <ul className="text-sm text-muted-foreground leading-relaxed space-y-1">
+                              {item.bullets.map((bullet, bulletIndex) => (
+                                <li key={bulletIndex} className="flex items-start">
+                                  <span className="text-primary mr-2 mt-1">•</span>
+                                  <span>{bullet}</span>
+                                </li>
+                              ))}
+                            </ul>
+                          ) : (
+                            <p className="text-sm text-muted-foreground leading-relaxed">
+                              No additional details available.
+                            </p>
+                          )}
+                          {item.tags && (
+                            <div className="mt-3 flex flex-wrap gap-1">
+                              {item.tags.map((tag, tagIndex) => (
+                                <Badge
+                                  key={tagIndex}
+                                  variant="outline"
+                                  className="text-xs bg-primary/10 border-primary/20 text-primary"
+                                >
+                                  {tag}
+                                </Badge>
+                              ))}
+                            </div>
+                          )}
                         </CardContent>
                       </Card>
                     </div>
