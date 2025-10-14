@@ -22,6 +22,8 @@ import {
   RotateCcw,
   ChevronDown,
   ChevronUp,
+  Plus,
+  Minus,
 } from 'lucide-react'
 import { 
   ProjectStatusItem, 
@@ -43,7 +45,6 @@ export function DraggableProjectsCard({
   const [windowSize, setWindowSize] = useState({ width: 0, height: 0 })
   const [mounted, setMounted] = useState(false)
   const [isMinimized, setIsMinimized] = useState(false)
-  const [showHint, setShowHint] = useState(true)
   const cardRef = useRef<HTMLDivElement>(null)
   const dragControls = useDragControls()
 
@@ -137,7 +138,6 @@ export function DraggableProjectsCard({
   // Toggle minimize state
   const toggleMinimize = () => {
     setIsMinimized(!isMinimized)
-    setShowHint(false) // Hide hint after first interaction
   }
 
   // Get status icon component
@@ -195,27 +195,14 @@ export function DraggableProjectsCard({
           {/* Mobile: Circular minimized state */}
           <div className={`sm:hidden ${isMinimized ? 'flex items-center justify-center w-12 h-12' : 'flex items-center justify-between'}`}>
             {isMinimized ? (
-              <div className="relative group">
-                <Button 
-                  variant="ghost" 
-                  size="sm" 
-                  className="h-12 w-12 p-0 rounded-full touch-manipulation"
-                  onClick={toggleMinimize}
-                  title="Tap to expand projects card"
-                >
-                  <div className="h-3 w-3 rounded-full bg-primary" />
-                </Button>
-                {/* Tooltip for mobile circle */}
-                <div className="absolute -top-10 left-1/2 transform -translate-x-1/2 bg-black/80 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap">
-                  Tap to expand
-                </div>
-                {/* Initial hint for mobile */}
-                {showHint && (
-                  <div className="absolute -top-12 left-1/2 transform -translate-x-1/2 bg-primary text-white text-xs px-2 py-1 rounded animate-pulse pointer-events-none whitespace-nowrap">
-                    Tap circle to expand
-                  </div>
-                )}
-              </div>
+              <Button 
+                variant="ghost" 
+                size="sm" 
+                className="h-12 w-12 p-0 rounded-full touch-manipulation"
+                onClick={toggleMinimize}
+              >
+                <Plus className="h-4 w-4 text-primary animate-pulse drop-shadow-lg" />
+              </Button>
             ) : (
               <div className="flex items-center justify-between w-full">
                 <div className="flex items-center gap-2">
@@ -223,21 +210,14 @@ export function DraggableProjectsCard({
                   <CardTitle className="text-sm font-medium">Projects</CardTitle>
                 </div>
                 <div className="flex items-center gap-1">
-                  <div className="relative group">
-                    <Button 
-                      variant="ghost" 
-                      size="sm" 
-                      className="h-7 w-7 p-0 touch-manipulation"
-                      onClick={toggleMinimize}
-                      title="Tap to minimize projects card"
-                    >
-                      <div className="h-2.5 w-2.5 rounded-full bg-primary" />
-                    </Button>
-                    {/* Tooltip for mobile minimize */}
-                    <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-black/80 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap">
-                      Tap to minimize
-                    </div>
-                  </div>
+                  <Button 
+                    variant="ghost" 
+                    size="sm" 
+                    className="h-7 w-7 p-0 touch-manipulation"
+                    onClick={toggleMinimize}
+                  >
+                    <Minus className="h-3 w-3 text-primary animate-pulse drop-shadow-lg" />
+                  </Button>
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
                       <Button variant="ghost" size="sm" className="h-7 w-7 p-0 touch-manipulation">
@@ -263,27 +243,18 @@ export function DraggableProjectsCard({
               <CardTitle className="text-sm font-medium">Projects</CardTitle>
             </div>
             <div className="flex items-center gap-1">
-              <div className="relative group">
-                <Button 
-                  variant="ghost" 
-                  size="sm" 
-                  className="h-6 w-6 p-0"
-                  onClick={toggleMinimize}
-                  title={isMinimized ? "Click to expand projects card" : "Click to minimize projects card"}
-                >
-                  {isMinimized ? <ChevronUp className="h-3 w-3" /> : <ChevronDown className="h-3 w-3" />}
-                </Button>
-                {/* Tooltip for desktop arrows */}
-                <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-black/80 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap">
-                  {isMinimized ? "Click to expand" : "Click to minimize"}
-                </div>
-                {/* Initial hint for desktop */}
-                {showHint && (
-                  <div className="absolute -top-10 left-1/2 transform -translate-x-1/2 bg-primary text-white text-xs px-2 py-1 rounded animate-pulse pointer-events-none whitespace-nowrap">
-                    Click arrow to minimize
-                  </div>
+              <Button 
+                variant="ghost" 
+                size="sm" 
+                className="h-6 w-6 p-0"
+                onClick={toggleMinimize}
+              >
+                {isMinimized ? (
+                  <Plus className="h-3 w-3 text-primary animate-pulse drop-shadow-lg" />
+                ) : (
+                  <Minus className="h-3 w-3 text-primary animate-pulse drop-shadow-lg" />
                 )}
-              </div>
+              </Button>
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Button variant="ghost" size="sm" className="h-6 w-6 p-0">
