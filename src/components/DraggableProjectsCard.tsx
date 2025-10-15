@@ -113,6 +113,7 @@ export function DraggableProjectsCard({
     }
   }
 
+
   // Handle drag end
   const handleDragEnd = (event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
     setIsDragging(false)
@@ -316,7 +317,7 @@ export function DraggableProjectsCard({
                   <div key={project.id} className="flex items-center gap-2 p-2 rounded-md bg-muted/30 hover:bg-muted/50 transition-colors">
                     {getStatusIcon(project.status)}
                     <div className="flex-1 min-w-0">
-                      <p className="text-xs font-medium truncate">{project.name}</p>
+                      <p className="text-xs font-medium break-words">{project.name}</p>
                       {project.updatedAt && (
                         <p className="text-xs text-muted-foreground">
                           {new Date(project.updatedAt).toLocaleDateString()}

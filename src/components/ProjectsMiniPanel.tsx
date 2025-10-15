@@ -66,6 +66,7 @@ export function ProjectsMiniPanel({
     }
   }, [localProjects, storageKey])
 
+
   const updateProjectStatus = (id: string, newStatus: ProjectStatus) => {
     setLocalProjects(prev => 
       prev.map(project => 
@@ -225,7 +226,7 @@ export function ProjectsMiniPanel({
 
                 {/* Project info */}
                 <div className="flex-1 min-w-0">
-                  <div className="font-medium text-sm truncate">
+                  <div className="font-medium text-sm break-words">
                     {project.name}
                   </div>
                   {project.updatedAt && (
